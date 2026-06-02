@@ -108,19 +108,22 @@ document.querySelectorAll(".sectionHeader").forEach(header => {
 
 // When clicked, open new page by sliding it in from the right.
 shortcutEditButton.onclick = () => {
-    setTimeout(() => {
-        shortcutEditPage.style.display = "block"
-    });
+    const shortcutsTabBtn = document.getElementById("shortcutsTabBtn");
+    if (shortcutsTabBtn) {
+        shortcutsTabBtn.click();
+    }
+
+    // Show the edit page immediately and trigger reflow
+    shortcutEditPage.style.display = "block";
+    shortcutEditPage.offsetHeight;
+
     requestAnimationFrame(() => {
-        overviewPage.style.transform = "translateX(-120%)"
-        overviewPage.style.opacity = "0"
+        overviewPage.style.transform = "translateX(-120%)";
+        overviewPage.style.opacity = "0";
+        shortcutEditPage.style.transform = "translateX(0)";
+        shortcutEditPage.style.opacity = "1";
     });
-    setTimeout(() => {
-        requestAnimationFrame(() => {
-            shortcutEditPage.style.transform = "translateX(0)"
-            shortcutEditPage.style.opacity = "1"
-        });
-    }, 50);
+
     setTimeout(() => {
         overviewPage.style.display = "none";
     }, 650);
@@ -128,19 +131,17 @@ shortcutEditButton.onclick = () => {
 
 // Close page by sliding it away to the right.
 backButton.onclick = () => {
-    setTimeout(() => {
-        overviewPage.style.display = "block"
-    });
+    // Show the overview page immediately and trigger reflow
+    overviewPage.style.display = "block";
+    overviewPage.offsetHeight;
+
     requestAnimationFrame(() => {
         shortcutEditPage.style.transform = "translateX(120%)";
         shortcutEditPage.style.opacity = "0";
+        overviewPage.style.transform = "translateX(0)";
+        overviewPage.style.opacity = "1";
     });
-    setTimeout(() => {
-        requestAnimationFrame(() => {
-            overviewPage.style.transform = "translateX(0)";
-            overviewPage.style.opacity = "1";
-        });
-    }, 50);
+
     setTimeout(() => {
         shortcutEditPage.style.display = "none";
     }, 650);

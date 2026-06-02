@@ -9,37 +9,6 @@
 // Translation data
 const translations = {
     en: en, // English
-    pt: pt, // Portuguese-BR (Brazil)
-    zh: zh, // Chinese (Simplified)
-    zh_TW: zh_TW, // Chinese (Traditional)
-    hi: hi, // Hindi
-    hu: hu, // Hungarian
-    cs: cs, // Czech
-    it: it, // Italian
-    tr: tr, // Turkish
-    bn: bn, // Bengali
-    vi: vi, // Vietnamese
-    ru: ru, // Russian
-    uz: uz, // Uzbek
-    es: es, // Spanish
-    ja: ja, // Japanese
-    ko: ko, // Korean
-    idn: idn, // Indonesian
-    mr: mr, // Marathi
-    fr: fr, // French
-    az: az, // Azerbaijani
-    sl: sl, // Slovenian
-    ne: ne, // Nepali
-    ur: ur, // Urdu
-    de: de, // German
-    fa: fa, // Farsi (Persian)
-    ar_SA: ar_SA, // Arabic (Saudi Arabia)
-    el: el, // Greek
-    ta: ta, // தமிழ்
-    th: th, // Thai
-    pl: pl, // Polish
-    uk: uk, // Ukrainian
-    sv: sv, // Swedish
 };
 
 // Define the width of the menu container for each language
@@ -116,6 +85,7 @@ const rtlLanguages = ["ur", "fa", "ar_SA"];
 
 // Function to apply the language to the page
 function applyLanguage(lang) {
+    const isRTL = rtlLanguages.includes(lang);
     document.title = translations[lang]?.newTabTitle || translations["en"].newTabTitle;
 
     // Mapping of text elements and their translation keys
@@ -136,8 +106,6 @@ function applyLanguage(lang) {
         "aiToolsSettingsInfo",
         "googleAppsMenuText",
         "googleAppsMenuInfo",
-        "todoListText",
-        "todoListInfo",
         "fahrenheitCelsiusCheckbox",
         "fahrenheitCelsiusText",
         "minMaxTempText",
@@ -146,14 +114,8 @@ function applyLanguage(lang) {
         "hideWeatherInfo",
         "hideWeatherBox",
         "hideWeatherBoxInfo",
-        "micIconTitle",
-        "micIconInfo",
         "hideSearchWith",
         "hideSearchWithInfo",
-        "motivationalQuotesText",
-        "motivationalQuotesInfo",
-        "newQuoteOnRefreshText",
-        "newQuoteOnRefreshInfo",
         "search_suggestions_button",
         "search_suggestions_text",
         "hideClockBox",
@@ -164,8 +126,6 @@ function applyLanguage(lang) {
         "timeformatinfo",
         "greetingtitle",
         "greetinginfo",
-        "userTextTitle",
-        "userTextInfo",
         "useproxytitletext",
         "useproxyText",
         "ProxyText",
@@ -192,7 +152,7 @@ function applyLanguage(lang) {
         "redditEngine",
         "wikipediaEngine",
         "quoraEngine",
-        "pinterestEngine",
+        "stackoverflowEngine",
         "scholarEngine",
         "chatGPT",
         "gemini",
@@ -206,21 +166,8 @@ function applyLanguage(lang) {
         'firefly',
         "github",
         "googleAppsHover",
-        "todoListHover",
         "uploadWallpaperText",
-        "backupText",
-        "restoreText",
         "rangColor",
-        "bookmarksText",
-        "bookmarksInfo",
-        "bookmarksHeading",
-        "bookmarkSortBy",
-        "sortAlphabetical",
-        "sortTimeAdded",
-        "bookmarkViewAs",
-        "bookmarkViewGrid",
-        "bookmarkViewList",
-        "editBookmarkHeading",
         "lightThemed",
         "darkThemed",
         "systemThemed",
@@ -250,16 +197,11 @@ function applyLanguage(lang) {
     const placeholderMap = [
         { id: "userLoc", key: "userLoc" },
         { id: "userAPI", key: "userAPI" },
-        { id: "searchQ", key: "searchPlaceholder" },
-        { id: "todoInput", key: "todoPlaceholder" },
-        { id: "bookmarkSearch", key: "bookmarkSearch" },
-        { id: "editBookmarkName", key: "editBookmarkName" },
-        { id: "editBookmarkURL", key: "editBookmarkURL" }
+        { id: "mainInput", key: "searchPlaceholder" }
     ];
 
     // Mapping of elements and their different translation keys
     const elementsMap = [
-        { id: "todoListHeading", key: "todoListText" },
         { id: "defaultEngineDD", key: "defaultEngine" },
         { id: "googleEngineDD", key: "googleEngine" },
         { id: "duckEngineDD", key: "duckEngine" },
@@ -270,23 +212,18 @@ function applyLanguage(lang) {
         { id: "redditEngineDD", key: "redditEngine" },
         { id: "wikipediaEngineDD", key: "wikipediaEngine" },
         { id: "quoraEngineDD", key: "quoraEngine" },
-        { id: "pinterestEngineDD", key: "pinterestEngine" },
+        { id: "stackoverflowEngineDD", key: "stackoverflowEngine" },
         { id: "scholarEngineDD", key: "scholarEngine" },
         { id: "youtubeEngine", key: "youtubeEngine" },
         { id: "redditEngine", key: "redditEngine" },
         { id: "wikipediaEngine", key: "wikipediaEngine" },
         { id: "quoraEngine", key: "quoraEngine" },
-        { id: "pinterestEngine", key: "pinterestEngine" },
+        { id: "stackoverflowEngine", key: "stackoverflowEngine" },
         { id: "scholarEngine", key: "scholarEngine" },
-        { id: "bookmarksHover", key: "bookmarksHeading" },
         { id: "saveproxy", key: "saveAPI" },
         { id: "saveLoc", key: "saveAPI" },
-        { id: "saveBookmarkChanges", key: "saveAPI" },
-        { id: "cancelBookmarkEdit", key: "cancelText" },
         { id: "aiSettingsHeader", key: "aiToolsSettingsText" },
         { id: "saveAISettingsBtn", key: "saveAPI" },
-        { id: "editBookmarkNameLabel", key: "editBookmarkName" },
-        { id: "editBookmarkURLLabel", key: "editBookmarkURL" },
         { id: "shortcutsSectionTitle", key: "shortcutsText" },
     ];
 
@@ -316,16 +253,6 @@ function applyLanguage(lang) {
     applyTranslations(elementsMap, false);     // For innerTexts with different IDs and keys
     applyTranslations(translationMap, false);  // For innerTexts with same ID and keys
 
-    // For userText
-    const userTextDiv = document.getElementById("userText");
-    if (translations[lang]) {
-        const placeholder = translations[lang]?.userText || translations["en"].userText;
-        userTextDiv.dataset.placeholder = placeholder; // Update the placeholder in data attribute
-        // Only set the text content if there's nothing in localStorage
-        if (!localStorage.getItem("userText")) {
-            userTextDiv.innerText = placeholder;
-        }
-    }
 
     // Update placeholders on already-rendered shortcut inputs
     document.querySelectorAll(".shortcutSettingsEntry .shortcutName")
@@ -388,10 +315,8 @@ function applyLanguage(lang) {
     }
 
     // Apply the direction attribute to specific selectors for RTL languages
-    const isRTL = rtlLanguages.includes(lang);
-    const rtlSelectors = [".topDiv", ".searchbar", ".searchWithCont", ".resultBox", ".quotesCont",
-        ".leftDiv", ".shortcutsContainer", ".page", "#prompt-modal-box", ".todo-container",
-        ".bookmark-search-container", ".bookmark-controls-container", "#editBookmarkModal", ".liquidGlass-toast"];
+    const rtlSelectors = [".topDiv", ".searchbar", ".searchWithCont", ".resultBox",
+        ".leftDiv", ".shortcutsContainer", ".page", "#prompt-modal-box", ".liquidGlass-toast"];
 
     rtlSelectors.forEach(selector => {
         document.querySelectorAll(selector).forEach(el => {
@@ -408,9 +333,7 @@ function applyLanguage(lang) {
         feelsLikeElement.style.textAlign = isRTL ? "right" : "left";
     }
 
-    const quotesText = document.querySelector(".quotesContainer");
-    // quotesText.style.textAlign = isRTL ? "right" : "left";
-    quotesText.style.fontFamily = commonFontStack;
+
 
     // Save the selected language in localStorage
     document.documentElement.lang = lang;

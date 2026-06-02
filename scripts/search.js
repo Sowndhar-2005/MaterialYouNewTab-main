@@ -7,7 +7,7 @@
  */
 
 const searchbar = document.getElementById("searchbar");
-const searchInput = document.getElementById("searchQ");
+const searchInput = document.getElementById("mainInput");
 
 const languageCode = (localStorage.getItem("selectedLanguage") || "en").slice(0, 2);
 const searchQueryURLs = {
@@ -16,7 +16,7 @@ const searchQueryURLs = {
     engine7: "https://www.reddit.com/search/?q=",
     engine8: "https://en.wikipedia.org/w/index.php?search=",
     engine9: "https://www.quora.com/search?q=",
-    engine10: "https://www.pinterest.com/search/pins/?q=",
+    engine10: "https://stackoverflow.com/search?q=",
     engine11: "https://scholar.google.com/scholar?q="
 };
 
@@ -41,12 +41,11 @@ document.addEventListener("click", function (event) {
 const searchWith = document.getElementById("searchWithHint");
 const searchEngines = document.querySelectorAll(".searchEnginesContainer .search-engine");
 const searchEnginesContainer = document.querySelector(".searchEnginesContainer");
-let activeSearchMode = localStorage.getItem("activeSearchMode") || "search-with";
+let activeSearchMode = "search-on";
 
 searchWith.addEventListener("click", function (event) {
-    activeSearchMode = (activeSearchMode === "search-with") ? "search-on" : "search-with";
     searchEnginesContainer.classList.toggle("show");
-    toggleSearchEngines(activeSearchMode);
+    toggleSearchEngines("search-on");
 
     event.stopPropagation();
     searchInput.focus();
@@ -58,16 +57,17 @@ searchWith.addEventListener("click", function (event) {
 });
 
 function toggleSearchEngines(category) {
+    // Force search-on mode
+    category = "search-on";
     const defaultItems = {
-        "search-with": "engine0",
-        "search-on": "engine5",
+        "search-on": "engine1",
     };
-    const checkeditem = localStorage.getItem(`selectedSearchEngine-${category}`) || defaultItems[category];
-    const searchModeName = category === "search-with" ? "searchWithHint" : "searchOnHint";
+    const checkeditem = localStorage.getItem(`selectedSearchEngine-search-on`) || defaultItems["search-on"];
+    const searchModeName = "searchOnHint";
     searchWith.innerText = translations[currentLanguage]?.[searchModeName] || translations["en"][searchModeName];
 
     searchEngines.forEach(engine => {
-        if (engine.getAttribute("data-category") === category) {
+        if (engine.getAttribute("data-category") === "search-on") {
             engine.style.display = "flex";
         } else {
             engine.style.display = "none";
@@ -93,14 +93,14 @@ dropdown.addEventListener("click", (event) => {
 });
 
 document.addEventListener("click", (event) => {
-    if (dropdown.classList.contains("show")) {
-        event.stopPropagation();
+    if (dropdown.classList.contains("show") && !event.target.closest(".dropdown") && !event.target.closest(".dropdown-btn")) {
         dropdown.classList.remove("show");
     }
 });
 
 
-document.querySelector(".dropdown-btn").addEventListener("click", function () {
+document.querySelector(".dropdown-btn").addEventListener("click", function (event) {
+    event.stopPropagation();
     const resultBox = document.getElementById("resultBox");
     if (resultBox.classList.toString().includes("show")) return;
 
@@ -145,14 +145,18 @@ searchDropdowns.forEach(element => {
         const radioButton = document.querySelector(`input[type="radio"][value="engine${engine}"]`);
         const selector = `*[data-engine-name=${element.getAttribute("data-engine-name")}]`;
 
-        radioButton.checked = true;
+        if (radioButton) {
+            radioButton.checked = true;
+            localStorage.setItem(`selectedSearchEngine-${radioButton.parentElement.dataset.category}`, radioButton.value);
+            localStorage.setItem(`activeSearchMode`, radioButton.parentElement.dataset.category);
+        } else {
+            localStorage.setItem(`selectedSearchEngine-search-on`, `engine${engine}`);
+            localStorage.setItem(`activeSearchMode`, `search-on`);
+        }
 
         // Swap the dropdown and sort them
         swapDropdown(selector);
         sortDropdown()
-
-        localStorage.setItem(`selectedSearchEngine-${radioButton.parentElement.dataset.category}`, radioButton.value);
-        localStorage.setItem(`activeSearchMode`, radioButton.parentElement.dataset.category);
     });
 });
 
@@ -164,7 +168,7 @@ document.querySelectorAll(".search-engine").forEach((engineDiv) => {
 
         radioButton.checked = true;
 
-        const radioButtonValue = radioButton.value.charAt(radioButton.value.length - 1);
+        const radioButtonValue = radioButton.value.replace("engine", "");
 
         const selector = `[data-engine="${radioButtonValue}"]`;
 
@@ -188,6 +192,7 @@ document.querySelectorAll(".search-engine").forEach((engineDiv) => {
 function swapDropdown(selectedElement) {
     // Swap innerHTML
     const element = document.querySelector(selectedElement);
+    if (!element) return;
     const tempHTML = defaultEngine.innerHTML;
     defaultEngine.innerHTML = element.innerHTML;
     element.innerHTML = tempHTML;
@@ -202,7 +207,8 @@ function swapDropdown(selectedElement) {
 
 // Function to perform search
 function performSearch(query) {
-    const selectedOption = document.querySelector('input[name="search-engine"]:checked').value;
+    const checkedOption = document.querySelector('input[name="search-engine"]:checked');
+    const selectedOption = checkedOption ? checkedOption.value : "engine1";
     const searchTerm = query || searchInput.value;
 
     if (searchTerm !== "") {
@@ -231,23 +237,28 @@ enterBTN.addEventListener("click", () => performSearch());
 
 // Set selected search engine from local storage
 const defaultItems = {
-    "search-with": "engine0",
-    "search-on": "engine5",
+    "search-on": "engine1",
 };
-let storedSearchEngine = localStorage.getItem(`selectedSearchEngine-${activeSearchMode}`);
+let storedSearchEngine = localStorage.getItem(`selectedSearchEngine-search-on`);
+
+// Automatically reset accidental/legacy Stack Overflow selection back to Google
+if (storedSearchEngine === "engine10") {
+    storedSearchEngine = "engine1";
+    localStorage.setItem(`selectedSearchEngine-search-on`, "engine1");
+}
 
 // Validate stored search engine
-const validEngines = ["engine0", "engine1", "engine5", "engine7", "engine8", "engine9", "engine10", "engine11"];
+const validEngines = ["engine1", "engine5", "engine7", "engine8", "engine9", "engine10", "engine11"];
 if (!storedSearchEngine || !validEngines.includes(storedSearchEngine)) {
-    storedSearchEngine = defaultItems[activeSearchMode];
-    localStorage.setItem(`selectedSearchEngine-${activeSearchMode}`, storedSearchEngine);
+    storedSearchEngine = defaultItems["search-on"];
+    localStorage.setItem(`selectedSearchEngine-search-on`, storedSearchEngine);
 }
 
 toggleSearchEngines(activeSearchMode);
 
 if (storedSearchEngine) {
     // Find Serial Number - SN with the help of charAt.
-    const storedSearchEngineSN = storedSearchEngine.charAt(storedSearchEngine.length - 1);
+    const storedSearchEngineSN = storedSearchEngine.replace("engine", "");
     const defaultDropdownSN = document.querySelector("*[data-default]").getAttribute("data-engine");
 
     // check if the default selected search engine is same as the stored one.
@@ -313,13 +324,19 @@ document.querySelector(".dropdown").addEventListener("keydown", function (event)
 
             const engine = selectedItem.getAttribute("data-engine");
             const radioButton = document.querySelector(`input[type="radio"][value="engine${engine}"]`);
-            radioButton.checked = true;
+
+            if (radioButton) {
+                radioButton.checked = true;
+                localStorage.setItem("selectedSearchEngine", radioButton.value);
+                localStorage.setItem("selectedSearchEngine-search-on", radioButton.value);
+            } else {
+                localStorage.setItem("selectedSearchEngine", `engine${engine}`);
+                localStorage.setItem("selectedSearchEngine-search-on", `engine${engine}`);
+            }
 
             // Swap the dropdown and sort them
             swapDropdown(`*[data-engine="${engine}"]`);
             sortDropdown();
-
-            localStorage.setItem("selectedSearchEngine", radioButton.value);
 
             // Close the dropdown after selection
             dropdown.classList.remove("show");
@@ -347,13 +364,13 @@ const searchIconContainer = document.querySelectorAll(".searchIcon");
 const showEngineContainer = () => {
     searchIconContainer[1].style.display = "none";
     searchIconContainer[0].style.display = "block";
-    document.getElementById("search-with-container").style.visibility = "visible";
+    document.getElementById("search-with-container").style.display = "flex";
 }
 
 const hideEngineContainer = () => {
     searchIconContainer[0].style.display = "none";
     searchIconContainer[1].style.display = "block";
-    document.getElementById("search-with-container").style.visibility = "hidden";
+    document.getElementById("search-with-container").style.display = "none";
 }
 
 const initShortCutSwitch = (element) => {
@@ -371,40 +388,28 @@ const hideSearchWith = document.getElementById("shortcut_switchcheckbox");
 hideSearchWith.addEventListener("change", (e) => {
     initShortCutSwitch(e.target);
 
-    // Fetch active search mode from storage
-    let activeSearchMode = localStorage.getItem("activeSearchMode") || "search-with";
-    toggleSearchEngines(activeSearchMode);
+    // Fetch active search mode from storage (strictly search-on)
+    toggleSearchEngines("search-on");
 
     // Get the selected search engine from localStorage
-    const storedSearchEngine = localStorage.getItem(`selectedSearchEngine-${activeSearchMode}`);
+    const storedSearchEngine = localStorage.getItem(`selectedSearchEngine-search-on`) || "engine1";
 
     // Find the corresponding radio button
     const selectedRadioButton = document.querySelector(`input[name="search-engine"][value="${storedSearchEngine}"]`);
     selectedRadioButton.checked = true;
 
     // Ensure UI is updated properly
-    const storedSearchEngineSN = storedSearchEngine.charAt(storedSearchEngine.length - 1);
+    const storedSearchEngineSN = storedSearchEngine.replace("engine", "");
     const selector = `*[data-engine="${storedSearchEngineSN}"]`;
 
     swapDropdown(selector);
     sortDropdown();
 });
 
-// Intialize shortcut switch
-if (localStorage.getItem("showShortcutSwitch")) {
-    const isShortCutSwitchEnabled = localStorage.getItem("showShortcutSwitch").toString() === "true";
-    document.getElementById("shortcut_switchcheckbox").checked = isShortCutSwitchEnabled;
-
-    if (isShortCutSwitchEnabled) {
-        hideEngineContainer();
-    } else if (!isShortCutSwitchEnabled) {
-        showEngineContainer()
-    }
-} else {
-    localStorage.setItem("showShortcutSwitch", false);
-}
-
-initShortCutSwitch(hideSearchWith);
+// Intialize shortcut switch (always show only in dropdown, don't show in window)
+localStorage.setItem("showShortcutSwitch", "true");
+document.getElementById("shortcut_switchcheckbox").checked = true;
+hideEngineContainer();
 
 // Swipe/Scroll to change search engines
 let engineSwipeStartY = 0;
@@ -458,7 +463,7 @@ function switchEngine(direction) {
     setTimeout(() => {
         radioButton.checked = true;
 
-        const radioButtonValue = radioButton.value.charAt(radioButton.value.length - 1);
+        const radioButtonValue = radioButton.value.replace("engine", "");
         const selector = `[data-engine="${radioButtonValue}"]`;
 
         swapDropdown(selector);

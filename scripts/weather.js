@@ -54,6 +54,25 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+
+    // Navigate to Google Weather app on weather card click
+    const weatherCard = document.querySelector(".rAndakar");
+    if (weatherCard) {
+        weatherCard.style.cursor = "pointer";
+        weatherCard.addEventListener("click", () => {
+            let cityName = "";
+            try {
+                const parsedData = JSON.parse(localStorage.getItem("weatherParsedData"));
+                if (parsedData && parsedData.location && parsedData.location.name) {
+                    cityName = parsedData.location.name;
+                }
+            } catch (e) {
+                console.error("Error reading weather cache for navigation:", e);
+            }
+            const searchQuery = cityName ? `weather ${cityName}` : "weather";
+            window.open(`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`, "_blank");
+        });
+    }
 });
 
 async function getWeatherData() {

@@ -43,21 +43,31 @@ MYNT: Material You New Tab is a versatile browser extension that personalizes yo
 
 #### 🔴 🟡 🟢 Test live: [https://prem-k-r.github.io/MaterialYouNewTab/](https://prem-k-r.github.io/MaterialYouNewTab/)
 
+## 🔄 Recent Refactorings & Bug Fixes (Old vs New)
+
+Here is a summary of the key bug fixes and code improvements made to **MYNT**:
+
+| Category / Component | ❌ Old Behavior (Issues) | 🟢 New Behavior (Improvements) |
+| :--- | :--- | :--- |
+| **Brave Search Bar Overlay** | Brave Browser's native heuristics matched the search input tag ID (`searchQ`), overlaying Brave's own address-bar dropdown directly over the custom Material You search dropdown. | Renamed input element ID to `mainInput` across HTML, CSS, and JavaScript. This successfully evades Brave's heuristic parser, ensuring our custom theme-matching picker remains fully visible. |
+| **Multi-Digit Engines Support** | The engine ID extractor parsed single-digit IDs (`"engine5" -> "5"`) using `.charAt(length - 1)`. This broke for double-digit engines like Stack Overflow (`"engine10"`) and Scholar (`"engine11"`), returning `"0"` and `"1"`, which crashed on data-attributes queries. | Replaced with `.replace("engine", "")` string substitution. Multi-digit search engines are now fully supported, validate correctly, and load with robust recovery logic. |
+| **Google Search Selection** | Selecting Google (`engine1`) from the search dropdown resulted in fatal JS script execution crashes because Google does not have a companion radio button in the settings panel to mark `checked`. | Added strict presence checks inside the event handlers. Google selections are now safely stored, validated, and applied without trying to modify non-existent elements. |
+| **Empty Edit Shortcuts View** | Opening "Manage" under Edit Shortcuts showed a completely empty sidebar page. This was because the active tab defaulted to `"folders"` (Workspaces & Folders), which was empty. | Defaults the initial settings view to `"shortcuts"` tab and programmatically triggers a click on `"shortcuts"` on slide-in, showing saved shortcuts instantly. |
+| **shortcuts.js scoping crash** | Fails to initialize on page load with `ReferenceError: currentLanguage is not defined` because it was not in the scope of `shortcuts.js`. | Declares `currentLanguage` locally inside the `DOMContentLoaded` block in `shortcuts.js`, resolving the crash. |
+| **Edit Shortcuts positioning** | `#shortcutEditPage` was rendered outside `#optCont` as a direct child of `#menuCont`, defaulting to `position: static` which pushed the entire view far off-screen. | Defined `#shortcutEditPage` in `style.css` with `position: absolute; top: 0; left: 0; width: 100%; height: 100%;` with theme-matching background, custom scrollbars, and limits. |
+| **Sidebar Page Transitions** | Opening pages utilized nested timers and race-prone CSS state changes, occasionally resulting in incomplete transitions or flickering frames. | Sets `display = "block"` instantly, triggers `offsetHeight` to force a browser reflow, and executes the slide transforms inside a unified `requestAnimationFrame` block for buttery-smooth animations. |
+
 ## ✨ Features
 
-- **Integrated Search**: Search directly from the New Tab using your preferred search engine — Google, DuckDuckGo, Bing, Brave Search, YouTube, Wikipedia, and more, with integrated voice typing.
-- **Customizable Themes**: Choose from a selection of themes or use the built-in color picker to match your style.
+- **Integrated Search**: Search directly from the New Tab page using your preferred search engine — Google, DuckDuckGo, Bing, Brave Search, YouTube, Wikipedia, and more.
+- **Customizable Themes**: Choose from a selection of dynamic Material You themes or use the built-in color picker to match your style.
 - **Wallpaper**: Upload your own wallpapers or enable daily random images sourced from [Lorem Picsum](https://picsum.photos).
 - **Personalized Greeting**: Add a custom message or your name, so you're greeted each time you open a new tab.
 - **Clock & Time Display**: Choose between a modern analog or digital clock.
 - **Live Weather Updates**: View real-time temperature, conditions, humidity, feels like, and max-min temperature values. Supports °C and °F with location customization.
-- **Quick Shortcuts**: Access common platforms (YouTube, Email, WhatsApp, etc.) or add your own shortcuts for instant navigation.
+- **Quick Shortcuts**: Access common platforms (YouTube, Email, WhatsApp, etc.) or add/edit your own custom shortcuts and folders for instant navigation.
 - **AI Tools**: Open ChatGPT, Gemini, Copilot, Perplexity, Claude, DeepSeek, and more with one click.
-- **To-Do List**: Manage daily tasks, pin important ones, and enjoy automatic cleanup at the start of each day (pinned tasks reset to pending).
-- **Sidebar Bookmarks**: View, delete, and organize bookmarks in either list or grid layout.
 - **Google Apps**: Quickly launch Gmail, Drive, Docs, and other Google services.
-- **Backup & Reset**: Save or restore your setup anytime, or reset everything to default with one click.
-- **Language Support**: Use the extension in your preferred language for better accessibility.
 - **Browser Compatibility**: Supports all Chromium-based browsers, including **Chrome**, **Edge**, **Brave**, and **Opera**, as well as Firefox-based browsers like **Firefox** and **Zen**.
 
 ## 📥 Installation Guide
@@ -214,46 +224,15 @@ For a step-by-step walkthrough, watch this [installation guide video](https://yo
 
 [![Watch the video](https://img.youtube.com/vi/P4ryQPixfw8/0.jpg)](https://youtu.be/P4ryQPixfw8) -->
 
-## 🌐 Currently Supported Languages (32)
+## 🌐 Currently Supported Languages (1)
 
-| Language                                                                                     | Code  | Translator(s)                                                                         |
-| -------------------------------------------------------------------------------------------- | :---: | ------------------------------------------------------------------------------------- |
-| <img src='https://flagcdn.com/us.svg' width=20> &nbsp; **English**                           |  en   | [XengShi](https://github.com/XengShi/), [Prem](https://github.com/prem-k-r/)          |
-| <img src='https://flagcdn.com/sa.svg' width=20> &nbsp; **Arabic** - العربية                     | ar-SA | [Mazen](https://github.com/Mazen3Alharbi)                                             |
-| <img src='https://flagcdn.com/az.svg' width=20> &nbsp; **Azerbaijani** - Azərbaycanca        |  az   | [Hasan Bakhtiar](https://github.com/hasanbakhtiar/)                                   |
-| <img src='https://flagcdn.com/bd.svg' width=20> &nbsp; **Bangla** - বাংলা                     |  bn   | [It'z RJ](https://github.com/itz-rj-here/), [Prem](https://github.com/prem-k-r/)      |
-| <img src='https://flagcdn.com/cn.svg' width=20> &nbsp; **Chinese** (Simplified) - 简体中文    | zh-CN | [Guy Berryman](https://github.com/Guy-Berryman), [Tianli](https://github.com/TIANLI0), [Konsento](http://github.com/kons10) |
-| <img src='https://flagcdn.com/tw.svg' width=20> &nbsp; **Chinese** (Traditional) - 繁體中文   | zh-TW | [C. Y. Tseng](https://github.com/Eddie40802)                                          |
-| <img src='https://flagcdn.com/cz.svg' width=20> &nbsp; **Czech** - Čeština                   |  cz   | [Michal Šmahel](https://github.com/ceskyDJ/)                                          |
-| <img src='https://flagcdn.com/fr.svg' width=20> &nbsp; **French** - Français                 |  fr   | [422.io](https://github.com/iamwinner422)                                             |
-| <img src='https://flagcdn.com/de.svg' width=20> &nbsp; **German** - Deutsch                  |  de   | [Prem](https://github.com/prem-k-r/)                                                  |
-| <img src='https://flagcdn.com/gr.svg' width=20> &nbsp; **Greek** - Ελληνικά                  |  el   | [Lefteris T.](https://github.com/trlef19)                                             |
-| <img src='https://flagcdn.com/in.svg' width=20> &nbsp; **Hindi** - हिंदी                       |  hi   | [XengShi](https://github.com/XengShi/), [Prem](https://github.com/prem-k-r/)          |
-| <img src='https://flagcdn.com/hu.svg' width=20> &nbsp; **Hungarian** - Magyar                |  hu   | [Zan1456](https://github.com/Zan1456/), [smurf11k](https://github.com/smurf11k/)      |
-| <img src='https://flagcdn.com/id.svg' width=20> &nbsp; **Indonesian** - Bahasa Indonesia     |  idn  | [Ayyas-RF](https://github.com/Ayyas-RF/)                                              |
-| <img src='https://flagcdn.com/it.svg' width=20> &nbsp; **Italian** - Italiano                |  it   | [Claudio Di Maio](https://github.com/ZiClaud/)                                        |
-| <img src='https://flagcdn.com/jp.svg' width=20> &nbsp; **Japanese** - 日本語                 |  ja   | [XengShi](https://github.com/XengShi/), [S-H-Y-A](https://github.com/S-H-Y-A/), [Konsento](http://github.com/kons10) |
-| <img src='https://flagcdn.com/kr.svg' width=20> &nbsp; **Korean** - 한국어                   |  ko   | [XengShi](https://github.com/XengShi/), [eunsunglee0524](https://github.com/eunsunglee0524/) |
-| <img src='https://flagcdn.com/in.svg' width=20> &nbsp; **Marathi** - मराठी                   |  mr   | [Prem](https://github.com/prem-k-r/), [Pratik Lokhande](https://github.com/konprtk), [Anand Naik Gaonkar](https://github.com/anndiy)   |
-| <img src='https://flagcdn.com/np.svg' width=20> &nbsp; **Nepali** - नेपाली                    |  ne   | [Bikash Shresha](https://github.com/sthaB-kash/)                                      |
-| <img src='https://flagcdn.com/ir.svg' width=20> &nbsp; **Persian** - فارسی                    |  fa   | [AMIRHOSSEIN](https://github.com/AMIRHOSSEIN-AHMADI-IR)                               |
-| <img src='https://flagcdn.com/pl.svg' width=20> &nbsp; **Polish** - Polski                  | pl | [Dawid Warkowski](https://github.com/dawid9707/)                                         |
-| <img src='https://flagcdn.com/br.svg' width=20> &nbsp; **Portuguese** - Português            | pt-BR | [Maycon Vitor Correa](https://github.com/MestreWalla/)                                |
-| <img src='https://flagcdn.com/ru.svg' width=20> &nbsp; **Russian** - Русский                 |  ru   | [giwi](https://github.com/giwih/), [CodWiz](https://github.com/C0dwiz/)               |
-| <img src='https://flagcdn.com/si.svg' width=20> &nbsp; **Slovenian** - Slovenščina           | sl-SI | [Linux-Alex](https://github.com/Linux-Alex/)                                          |
-| <img src='https://flagcdn.com/es.svg' width=20> &nbsp; **Spanish** - Español                 | es-ES | [XengShi](https://github.com/XengShi/), [Isaac Vergara](https://github.com/zRaidev), [Saúl Palacios](https://github.com/palacios22c)  |
-| <img src='https://flagcdn.com/sv.svg' width=20> &nbsp; **Swedish** - Svenska                 | sv | [HELLOEMPO](https://github.com/empohello-imamempogitub/)                                 |
-| <img src='https://flagcdn.com/in.svg' width=20> &nbsp; **Tamil** - தமிழ்                 | ta | [தமிழ்நேரம்](https://TamilNeram.github.io/)                                                |
-| <img src='https://flagcdn.com/th.svg' width=20> &nbsp; **Thai** - ภาษาไทย                 | th | [Prin](https://github.com/prinsasina)                                                |
-| <img src='https://flagcdn.com/tr.svg' width=20> &nbsp; **Turkish** - Türkçe                  |  tr   | [Nobody](https://github.com/Nobody9512), [Kerim Ölçer](https://github.com/kerimlcr)   |
-| <img src='https://flagcdn.com/ua.svg' width=20> &nbsp; **Ukrainian** - Українська            | uk | [Serhii Lozytskyi](https://github.com/lozik4), [smurf11k](https://github.com/smurf11k/)  |
-| <img src='https://flagcdn.com/pk.svg' width=20> &nbsp; **Urdu** - اردو                        |  ur   | [Asfandiyar Khan](https://github.com/asfand-dev)                                      |
-| <img src='https://flagcdn.com/uz.svg' width=20> &nbsp; **Uzbek** - O'zbek                    |  uz   | [Firdavs](https://github.com/Firdavs9512/), [S0ME2](https://github.com/S0ME2/)                                            |
-| <img src='https://flagcdn.com/vn.svg' width=20> &nbsp; **Vietnamese** - Tiếng Việt           |  vn   | [Diep](https://github.com/diepdo1810/), [Tuan](https://github.com/Tuan1-2-3)          |
+Currently, the extension supports English out-of-the-box:
 
-Check the [Translation Status Page](https://prem-k-r.github.io/MaterialYouNewTab/tools/languagesAnalysis.html) for an overview of completed languages and missing strings analysis.
+| Language | Code | Translator(s) |
+| --- | :---: | --- |
+| <img src='https://flagcdn.com/us.svg' width=20> &nbsp; **English** | en | [XengShi](https://github.com/XengShi/), [Prem](https://github.com/prem-k-r/) |
 
-If you'd like to contribute quotes in any of the languages used in MYNT, check out [Multilingual Quotes](https://github.com/prem-k-r/multilingual-quotes-api).
+If you would like to help translate MYNT into your language, feel free to open a pull request or check out the [CONTRIBUTING.md](./CONTRIBUTING.md) guide.
 
 ## 🤝 Contributing
 

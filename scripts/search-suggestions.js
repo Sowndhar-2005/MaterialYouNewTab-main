@@ -208,7 +208,8 @@ function getClientParam() {
 
 async function getAutocompleteSuggestions(query) {
     const clientParam = getClientParam(); // Get the browser client parameter dynamically
-    var selectedOption = document.querySelector('input[name="search-engine"]:checked').value;
+    const checkedOption = document.querySelector('input[name="search-engine"]:checked');
+    var selectedOption = checkedOption ? checkedOption.value : "engine1";
 
     const searchSuggestionsAPI = {
         engine0: `https://duckduckgo.com/ac/?q=${encodeURIComponent(query)}&type=list`,

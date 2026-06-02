@@ -3,3 +3,9 @@
 
 # Ignore VSCode workspace settings
 .vscode/
+
+# Ignore local screen recordings and scratch files
+Screen Recording*
+*.mp4
+scratch/
+

@@ -122,67 +122,68 @@ async function initializeClock() {
     initializeClockType();
 
     function updateDate() {
-        if (clocktype === "analog") {
-            var currentTime = new Date();
-            var dayOfWeek = currentTime.getDay();
-            var dayOfMonth = currentTime.getDate();
-            var month = currentTime.getMonth();
+        var currentTime = new Date();
+        var dayOfWeek = currentTime.getDay();
+        var dayOfMonth = currentTime.getDate();
+        var month = currentTime.getMonth();
 
-            // Define the current language
-            const currentLanguage = getLanguageStatus("selectedLanguage") || "en";
+        // Define the current language
+        const currentLanguage = getLanguageStatus("selectedLanguage") || "en";
 
-            // Get the translated name of the day
-            var dayName = translations[currentLanguage]?.days?.[dayOfWeek] ?? translations["en"].days[dayOfWeek];
+        // Get the translated name of the day
+        var dayName = translations[currentLanguage]?.days?.[dayOfWeek] ?? translations["en"].days[dayOfWeek];
 
-            // Get the translated name of the month
-            var monthName = translations[currentLanguage]?.months?.[month] ?? translations["en"].months[month];
+        // Get the translated name of the month
+        var monthName = translations[currentLanguage]?.months?.[month] ?? translations["en"].months[month];
 
-            // Localize the day of the month
-            var localizedDayOfMonth = localizeNumbers(dayOfMonth.toString(), currentLanguage);
+        // Localize the day of the month
+        var localizedDayOfMonth = localizeNumbers(dayOfMonth.toString(), currentLanguage);
 
-            // DATE DISPLAY FOR ANALOG CLOCK
-            const dateDisplay = {
-                bn: `${dayName}, ${localizedDayOfMonth} ${monthName}`,
-                mr: `${dayName}, ${localizedDayOfMonth} ${monthName}`,
-                ne: `${dayName}, ${localizedDayOfMonth} ${monthName}`,
-                zh: `${month + 1}月${dayOfMonth}日，${dayName}`,
-                zh_TW: `${month + 1}月${dayOfMonth}日，${dayName}`,
-                cs: `${dayName}, ${dayOfMonth}. ${monthName}`,
-                hi: `${dayName}, ${dayOfMonth} ${monthName}`,
-                it: `${dayName.substring(0, 3)} ${dayOfMonth} ${monthName.substring(0, 3)}`,
-                ja: `${monthName} ${dayOfMonth}日(${dayName.substring(0, 1)})`,
-                ko: `${monthName} ${dayOfMonth}일(${dayName.substring(0, 1)})`,
-                pl: `${dayName}, ${dayOfMonth}. ${monthName}`,
-                pt: `${dayName.substring(0, 3)}, ${dayOfMonth} ${monthName.substring(0, 3)}`,
-                ru: `${dayName}, ${dayOfMonth} ${monthName}`,
-                es: `${dayName.substring(0, 3)}, ${dayOfMonth} ${monthName.substring(0, 3)}`,
-                tr: `${dayName.substring(0, 3)}, ${dayOfMonth} ${monthName}`,
-                uz: `${dayName.substring(0, 3)}, ${dayOfMonth}-${monthName}`,
-                vi: `${dayName}, ngày ${dayOfMonth} ${monthName}`,
-                idn: `${dayName}, ${dayOfMonth} ${monthName}`,
-                fr: `${dayName.substring(0, 3)}, ${dayOfMonth} ${monthName.substring(0, 3)}`, // Jeudi, 5 avril
-                az: `${dayName.substring(0, 3)}, ${dayOfMonth} ${monthName.substring(0, 3)}`,
-                sl: `${dayName}, ${dayOfMonth}. ${monthName.substring(0, 3)}.`,
-                hu: `${monthName.substring(0, 3)} ${dayOfMonth}, ${dayName}`,	// Dec 22, Kedd
-                ta: `${monthName} ${localizedDayOfMonth}, ${dayName}`,	// e.g.,மார்கழி 31, ஞாயிறு
-                ur: `${dayName}، ${dayOfMonth} ${monthName}`,
-                de: `${dayName}, ${dayOfMonth}. ${monthName}`,
-                fa: `${dayName}، ${localizedDayOfMonth} ${monthName}`, // e.g., شنبه، ۲۵ اسفند
-                ar_SA: `${dayName}, ${localizedDayOfMonth} ${monthName}`,	// e.g., الجمعة, 31 مايو
-                el: `${dayName.substring(0, 3)} ${dayOfMonth} ${monthName}`, // Κυρ 22 Δεκ
-                th: `วัน${dayName}ที่ ${dayOfMonth} ${monthName}`, // วันอาทิตย์ที่ 22 ธันวาคม
-                uk: `${dayName}, ${dayOfMonth} ${monthName.substring(0, 4)}`,
-                sv: `${dayName.substring(0, 3)} ${dayOfMonth} ${monthName.substring(0, 3)}`, // Sön 19 Apr
-                default: `${dayName.substring(0, 3)}, ${monthName.substring(0, 3)} ${dayOfMonth}`	// Sun, Dec 22
-            };
+        // DATE DISPLAY FOR CLOCK DOWNSIDE
+        const dateDisplay = {
+            bn: `${dayName}, ${localizedDayOfMonth} ${monthName}`,
+            mr: `${dayName}, ${localizedDayOfMonth} ${monthName}`,
+            ne: `${dayName}, ${localizedDayOfMonth} ${monthName}`,
+            zh: `${month + 1}月${dayOfMonth}日，${dayName}`,
+            zh_TW: `${month + 1}月${dayOfMonth}日，${dayName}`,
+            cs: `${dayName}, ${dayOfMonth}. ${monthName}`,
+            hi: `${dayName}, ${dayOfMonth} ${monthName}`,
+            it: `${dayName.substring(0, 3)} ${dayOfMonth} ${monthName.substring(0, 3)}`,
+            ja: `${monthName} ${dayOfMonth}日(${dayName.substring(0, 1)})`,
+            ko: `${monthName} ${dayOfMonth}일(${dayName.substring(0, 1)})`,
+            pl: `${dayName}, ${dayOfMonth}. ${monthName}`,
+            pt: `${dayName.substring(0, 3)}, ${dayOfMonth} ${monthName.substring(0, 3)}`,
+            ru: `${dayName}, ${dayOfMonth} ${monthName}`,
+            es: `${dayName.substring(0, 3)}, ${dayOfMonth} ${monthName.substring(0, 3)}`,
+            tr: `${dayName.substring(0, 3)}, ${dayOfMonth} ${monthName}`,
+            uz: `${dayName.substring(0, 3)}, ${dayOfMonth}-${monthName}`,
+            vi: `${dayName}, ngày ${dayOfMonth} ${monthName}`,
+            idn: `${dayName}, ${dayOfMonth} ${monthName}`,
+            fr: `${dayName.substring(0, 3)}, ${dayOfMonth} ${monthName.substring(0, 3)}`, // Jeudi, 5 avril
+            az: `${dayName.substring(0, 3)}, ${dayOfMonth} ${monthName.substring(0, 3)}`,
+            sl: `${dayName}, ${dayOfMonth}. ${monthName.substring(0, 3)}.`,
+            hu: `${monthName.substring(0, 3)} ${dayOfMonth}, ${dayName}`,	// Dec 22, Kedd
+            ta: `${monthName} ${localizedDayOfMonth}, ${dayName}`,	// e.g.,மார்கழி 31, ஞாயிறு
+            ur: `${dayName}، ${dayOfMonth} ${monthName}`,
+            de: `${dayName}, ${dayOfMonth}. ${monthName}`,
+            fa: `${dayName}، ${localizedDayOfMonth} ${monthName}`, // e.g., شنبه، ۲۵ اسفند
+            ar_SA: `${dayName}, ${localizedDayOfMonth} ${monthName}`,	// e.g., الجمعة, 31 مايو
+            el: `${dayName.substring(0, 3)} ${dayOfMonth} ${monthName}`, // Κυρ 22 Δεκ
+            th: `วัน${dayName}ที่ ${dayOfMonth} ${monthName}`, // วันอาทิตย์ที่ 22 ธันวาคม
+            uk: `${dayName}, ${dayOfMonth} ${monthName.substring(0, 4)}`,
+            sv: `${dayName.substring(0, 3)} ${dayOfMonth} ${monthName.substring(0, 3)}`, // Sön 19 Apr
+            default: `${dayName.substring(0, 3)}, ${monthName.substring(0, 3)} ${dayOfMonth}`	// Sun, Dec 22
+        };
 
-            const newDateString = dateDisplay[currentLanguage] || dateDisplay.default;
-            // Update date if date actually changed or if it's the first time
-            if (newDateString !== lastDateString) {
-                document.getElementById("date").innerText = newDateString;
-                lastDateString = newDateString;
-            }
+        const newDateString = dateDisplay[currentLanguage] || dateDisplay.default;
+        // Update date if date actually changed or if it's the first time
+        if (newDateString !== lastDateString) {
+            document.getElementById("date").innerText = newDateString;
+            lastDateString = newDateString;
         }
+
+        // Dynamically update and display the greeting in the greeting section (#userText)
+        updateGreeting();
     }
 
     // Helper function to update hand rotation smoothly
@@ -247,15 +248,103 @@ async function initializeClock() {
             greetingKey = "morning";
         } else if (currentHour < 17) {
             greetingKey = "afternoon";
-        } else {
+        } else if (currentHour < 21) {
             greetingKey = "evening";
+        } else {
+            greetingKey = "night";
         }
 
         // Get the user's language setting
         const currentLanguage = getLanguageStatus("selectedLanguage") || "en"; // Default to English
 
-        // Return the translated greeting is available
+        // Return the translated greeting if available
         return translations[currentLanguage]?.greeting?.[greetingKey] ?? translations["en"].greeting[greetingKey];
+    }
+
+    function updateGreeting() {
+        const userTextDiv = document.getElementById("userText");
+        if (!userTextDiv) return;
+
+        const isGreetingEnabled = localStorage.getItem("greetingEnabled") !== "false";
+        
+        if (isGreetingEnabled) {
+            userTextDiv.style.display = "block";
+            
+            const currentHour = new Date().getHours();
+            let greetingKey;
+
+            if (currentHour < 12) {
+                greetingKey = "morning";
+            } else if (currentHour < 17) {
+                greetingKey = "afternoon";
+            } else if (currentHour < 21) {
+                greetingKey = "evening";
+            } else {
+                greetingKey = "night";
+            }
+
+            const greetingText = getGreeting();
+            let cleanGreeting = greetingText;
+            if (cleanGreeting.endsWith("!")) {
+                cleanGreeting = cleanGreeting.slice(0, -1);
+            }
+
+            // Poetical status subtexts that rotate daily to keep the tab fresh
+            const subtextTemplates = {
+                morning: [
+                    "Soft skies and fresh starts",
+                    "A beautiful morning breeze",
+                    "Bright morning and new beginnings",
+                    "Rise and shine",
+                    "Peaceful morning thoughts"
+                ],
+                afternoon: [
+                    "Warm sun and golden hours",
+                    "A productive and bright afternoon",
+                    "Sunny thoughts and clear skies",
+                    "Basking in the golden rays"
+                ],
+                evening: [
+                    "Quiet evening, peaceful mind",
+                    "Soft skies and twilight glow",
+                    "Calm night under the stars",
+                    "Peaceful and quiet evening",
+                    "Cozy evening vibes"
+                ],
+                night: [
+                    "Quiet night, peaceful mind",
+                    "Calm night under the stars",
+                    "Peaceful and quiet night",
+                    "Cozy night vibes",
+                    "Rest well and sweet dreams"
+                ]
+            };
+
+            const templates = subtextTemplates[greetingKey];
+            const dayOfMonth = new Date().getDate();
+            const templateIndex = dayOfMonth % templates.length;
+            const selectedTemplate = templates[templateIndex];
+
+            const username = localStorage.getItem("greetingUsername") || "";
+            // Use cozy lowercase format for the username inside the cursive subtext caption
+            const formattedSubtext = username ? `${selectedTemplate}, ${username.toLowerCase()}.` : `${selectedTemplate}.`;
+
+            // Render structured HTML with main title and animated subtext only if it changed
+            const newGreetingHTML = `
+                <div class="greeting-main">${cleanGreeting}</div>
+                <div class="greeting-sub">${formattedSubtext}</div>
+            `;
+            if (lastGreetingString !== newGreetingHTML) {
+                userTextDiv.innerHTML = newGreetingHTML;
+                lastGreetingString = newGreetingHTML;
+            }
+        } else {
+            userTextDiv.style.display = "none";
+            if (lastGreetingString !== "") {
+                userTextDiv.innerHTML = "";
+                lastGreetingString = "";
+            }
+        }
     }
 
     function updatedigiClock() {
@@ -390,18 +479,8 @@ async function initializeClock() {
             document.getElementById("amPm").textContent = ""; // Clear AM/PM for 24-hour format
         }
 
-        const clocktype1 = localStorage.getItem("clocktype");
-        const dateElement = document.getElementById("date");
-        if (clocktype1 === "digital" && isGreetingEnabled) {
-            const newGreeting = getGreeting();
-            if (newGreeting !== lastGreetingString) {
-                dateElement.style.display = "block";
-                dateElement.innerText = newGreeting;
-                lastGreetingString = newGreeting;
-            }
-        } else if (clocktype1 === "digital") {
-            dateElement.style.display = "none";  // Hide the greeting
-        }
+        // Always update bottom date in digital mode too
+        updateDate();
     }
 
     // Function to start the analog clock
@@ -496,20 +575,18 @@ async function initializeClock() {
         const digitalCheckbox = document.getElementById("digitalCheckbox");
         const greetingCheckbox = document.getElementById("greetingcheckbox");
         const greetingField = document.getElementById("greetingField");
+        const usernameInput = document.getElementById("greetingUsername");
 
         if (localStorage.getItem("greetingEnabled") === null) {
             localStorage.setItem("greetingEnabled", "true");
         }
 
         greetingCheckbox.checked = localStorage.getItem("greetingEnabled") === "true";
-        greetingCheckbox.disabled = localStorage.getItem("clocktype") !== "digital";
 
         digitalCheckbox.addEventListener("change", function () {
             saveCheckboxState("digitalCheckboxState", digitalCheckbox);
             if (digitalCheckbox.checked) {
                 timeformatField.classList.remove("inactive");
-                greetingField.classList.remove("inactive");
-                greetingCheckbox.disabled = false; // Enable greeting toggle
                 localStorage.setItem("clocktype", "digital");
                 clocktype = localStorage.getItem("clocktype");
                 displayClock();
@@ -517,11 +594,8 @@ async function initializeClock() {
                 startDigitalClock();
                 updatedigiClock();
                 saveActiveStatus("timeformatField", "active");
-                saveActiveStatus("greetingField", "active");
             } else {
                 timeformatField.classList.add("inactive");
-                greetingField.classList.add("inactive");
-                greetingCheckbox.disabled = true; // Disable greeting toggle
                 localStorage.setItem("clocktype", "analog");
                 clocktype = localStorage.getItem("clocktype");
                 stopDigitalClock();
@@ -530,7 +604,6 @@ async function initializeClock() {
                 displayClock();
                 resetDateDisplay();
                 saveActiveStatus("timeformatField", "inactive");
-                saveActiveStatus("greetingField", "inactive");
             }
         });
 
@@ -545,12 +618,27 @@ async function initializeClock() {
 
         greetingCheckbox.addEventListener("change", () => {
             localStorage.setItem("greetingEnabled", greetingCheckbox.checked);
-            updatedigiClock();
+            updateGreeting();
         });
+
+        if (usernameInput) {
+            usernameInput.value = localStorage.getItem("greetingUsername") || "";
+            usernameInput.addEventListener("input", () => {
+                localStorage.setItem("greetingUsername", usernameInput.value.trim());
+                updateGreeting();
+            });
+        }
 
         loadCheckboxState("digitalCheckboxState", digitalCheckbox);
         loadCheckboxState("hourcheckboxState", hourcheckbox);
         loadActiveStatus("timeformatField", timeformatField);
-        loadActiveStatus("greetingField", greetingField);
+
+        // Always show the greeting field as active since greeting works for both digital and analog clocks now
+        if (greetingField) {
+            greetingField.classList.remove("inactive");
+        }
+
+        // Render greeting immediately
+        updateGreeting();
     });
 }

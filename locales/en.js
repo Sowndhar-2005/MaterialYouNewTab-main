@@ -52,11 +52,9 @@ const en = {
     "timeformattitle": "12-Hour Format",
     "timeformatinfo": "Use 12-hour time format",
     "greetingtitle": "Greeting",
-    "greetinginfo": "Show greeting below custom text",
+    "greetinginfo": "Show greeting below date",
 
     // Misc
-    "userTextTitle": "Customizable Text",
-    "userTextInfo": "Show custom text below the clock",
     "fahrenheitCelsiusCheckbox": "Switch to Fahrenheit",
     "fahrenheitCelsiusText": "Refresh the page to apply changes",
     "hideWeatherTitle": "Hide Weather",
@@ -135,7 +133,8 @@ const en = {
     greeting: {
         "morning": "Good Morning!",
         "afternoon": "Good Afternoon!",
-        "evening": "Good Evening!"
+        "evening": "Good Evening!",
+        "night": "Good Night!"
     },
 
     // Search Engines
@@ -149,7 +148,7 @@ const en = {
     "redditEngine": "Reddit",
     "wikipediaEngine": "Wikipedia",
     "quoraEngine": "Quora",
-    "pinterestEngine": "Pinterest",
+    "stackoverflowEngine": "Stack Overflow",
     "scholarEngine": "Google Scholar",
 
     // AI Tools

@@ -30,176 +30,47 @@
     <script defer src="scripts/widgets-transparency.js"></script>
     <script defer src="scripts/clock.js"></script>
     <script defer src="scripts/weather.js"></script>
+    <script defer src="scripts/news.js"></script>
     <script defer src="scripts/calendar.js"></script>
-    <script defer src="scripts/custom-text.js"></script>
     <script defer src="scripts/search.js"></script>
-    <script defer src="scripts/quotes.js"></script>
     <script defer src="scripts/shortcuts.js"></script>
     <script defer src="scripts/script.js"></script>
     <script defer src="scripts/search-suggestions.js"></script>
     <script defer src="scripts/ai-tools.js"></script>
-    <script defer src="scripts/bookmarks.js"></script>
-    <script defer src="scripts/todo-list.js"></script>
+    <script defer src="scripts/goals.js"></script>
     <script defer src="scripts/google-apps.js"></script>
-    <script defer src="scripts/voice-search.js"></script>
-    <script defer src="scripts/backup-restore.js"></script>
 
     <!-- LANGUAGES SCRIPTS -->
-    <script src="locales/pt.js"></script>
     <script src="locales/en.js"></script>
-    <script src="locales/ne.js"></script>
-    <script src="locales/es.js"></script>
-    <script src="locales/hi.js"></script>
-    <script src="locales/hu.js"></script>
-    <script src="locales/zh.js"></script>
-    <script src="locales/zh_TW.js"></script>
-    <script src="locales/cs.js"></script>
-    <script src="locales/it.js"></script>
-    <script src="locales/tr.js"></script>
-    <script src="locales/bn.js"></script>
-    <script src="locales/vi.js"></script>
-    <script src="locales/ru.js"></script>
-    <script src="locales/uz.js"></script>
-    <script src="locales/ja.js"></script>
-    <script src="locales/ko.js"></script>
-    <script src="locales/idn.js"></script>
-    <script src="locales/mr.js"></script>
-    <script src="locales/fr.js"></script>
-    <script src="locales/az.js"></script>
-    <script src="locales/sl.js"></script>
-    <script src="locales/ur.js"></script>
-    <script src="locales/de.js"></script>
-    <script src="locales/fa.js"></script>
-    <script src="locales/ar_SA.js"></script>
-    <script src="locales/el.js"></script>
-    <script src="locales/ta.js"></script>
-    <script src="locales/th.js"></script>
-    <script src="locales/pl.js"></script>
-    <script src="locales/uk.js"></script>
-    <script src="locales/sv.js"></script>
 </head>
 
 <body>
     <!-- --------------------- Loading Screen Starting --------------------- -->
     <img src="./images/Loading.png" id="LoadingScreen" fetchpriority="high" />
 
-    <!-- --------------------- ToDo List Setup Starting --------------------- -->
-    <!-- ToDo Icon -->
-    <div class="todoListCont" id="todoListCont">
-        <svg id="todoIcon" xmlns="http://www.w3.org/2000/svg" class="dot-icon" width="36" height="36"
-            viewBox="0 0 36 36">
-            <path style="transform: scale(0.9); transform-origin: center;"
-                d="M7 4C5.3 4 4 5.3 4 7v6c0 1.7 1.3 3 3 3h6c1.7 0 3-1.3 3-3V7c0-1.7-1.3-3-3-3Zm12 2c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1Zm-6 1c.25 0 .5.1.7.3.4.4.4 1 0 1.4l-3 3c-.2.2-.4.3-.7.3-.3 0-.5-.1-.7-.3l-2-2c-.4-.4-.4-1 0-1.4.4-.4 1-.4 1.4 0L10 9.6l2.3-2.3c.2-.2.45-.3.7-.3Zm6 3c-.6 0-1 .4-1 1s.4 1 1 1h7c.6 0 1-.4 1-1s-.4-1-1-1zM7 20c-1.7 0-3 1.3-3 3v6c0 1.7 1.3 3 3 3h6c1.7 0 3-1.3 3-3v-6c0-1.7-1.3-3-3-3zm12 2c-.6 0-1 .4-1 1s.4 1 1 1h12c.6 0 1-.4 1-1s-.4-1-1-1zm0 4c-.6 0-1 .4-1 1s.4 1 1 1h7c.6 0 1-.4 1-1s-.4-1-1-1z" />
-        </svg>
-        <!-- Text to appear on hover -->
-        <span class="tooltip-text" id="todoListHover">ToDo List</span>
-    </div>
-
-    <!-- Centered Icon Container -->
-    <div id="todoContainer" class="todo-container" style="display: none;">
-        <h2 id="todoListHeading">To Do List</h2>
-        <div class="addTaskCont">
-            <input id="todoInput" placeholder="Add task..." type="text" autocomplete="off">
-            <div class="searchControls">
-                <!-- Add Button -->
-                <button id="todoAdd">+</button>
-            </div>
-        </div>
-        <ul class="todolist" id="todoullist">
-        </ul>
-    </div>
-
-    <!-- --------------------- Bookmark System --------------------- -->
-    <div style="display: none;">
-        <svg id="folderIconTemplate" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 6v10.8c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874c.427.218.987.218 2.105.218h11.606c1.118 0 1.677 0 2.104-.218c.377-.192.683-.498.875-.874C21 18.48 21 17.92 21 16.8V9.2c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C19.48 6 18.92 6 17.8 6H12M3 6h9M3 6a2 2 0 0 1 2-2h3.675c.489 0 .734 0 .964.055q.308.075.578.24c.202.124.375.297.72.643L12 6" />
+    <div id="menuButton">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="settings-btn-icon"
+            style="width: 24px; height: 24px;">
+            <path
+                d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1a8.45 8.45 0 0 0-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z" />
         </svg>
     </div>
 
-    <div class="bookmark-button" id="bookmarkButton">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-            <path fill-rule="evenodd"
-                d="M7 2a3 3 0 0 0-3 3v15.138a1.5 1.5 0 0 0 2.244 1.303l5.26-3.006a1 1 0 0 1 .992 0l5.26 3.006A1.5 1.5 0 0 0 20 20.138V5a3 3 0 0 0-3-3z"
-                clip-rule="evenodd" />
-        </svg>
-        <!-- Text to appear on hover -->
-        <span class="tooltip-text" id="bookmarksHover">Bookmarks</span>
-    </div>
-    <div id="bookmarksContainer">
-        <div id="bookmarkSidebar" class="bookmark-sidebar">
 
-            <div class="topOutRoundCorner">
-                <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                    <path class="lessDark" d="M30 0L0 0C16.5685 0 30 13.4315 30 30L30 0Z" />
-                </svg>
-            </div>
 
-            <div class="bookmark-sidebar-header">
-                <h2 id="bookmarksHeading">Bookmarks</h2>
-            </div>
-            <div class="bookmark-search-container">
-                <input type="text" id="bookmarkSearch" placeholder="Search bookmark" />
-                <button id="clearSearchButton">✖</button>
-            </div>
-            <!-- Adding Sorting buttons along with View Container -->
-            <div class="bookmark-controls-container">
-                <div class="bookmark-control-group">
-                    <h3 id="bookmarkSortBy">Sort by</h3>
-                    <div class="button-group">
-                        <button id="sortAlphabetical" class="bookmark-sort-button active">A-Z</button>
-                        <button id="sortTimeAdded" class="bookmark-sort-button">Old-New</button>
-                    </div>
-                </div>
-
-                <div class="bookmark-control-group">
-                    <h3 id="bookmarkViewAs">View as</h3>
-                    <div class="button-group">
-                        <input type="checkbox" id="bookmarkGridCheckbox" hidden />
-                        <button id="bookmarkViewGrid" class="bookmark-view-as-button">Grid</button>
-                        <button id="bookmarkViewList" class="bookmark-view-as-button">List</button>
-                    </div>
-                </div>
-            </div>
-            <ul id="bookmarkList"></ul>
-        </div>
-    </div>
-
-    <!-- Edit Bookmark Modal -->
-    <div id="editBookmarkModal">
-        <div class="modal-content">
-            <h2 id="editBookmarkHeading">Edit Bookmark</h2>
-
-            <img id="editBookmarkFavicon" src="" alt="Favicon">
-
-            <div class="floating-label-field">
-                <input type="text" id="editBookmarkName" autocomplete="off" />
-                <label for="editBookmarkName" id="editBookmarkNameLabel">Bookmark Name</label>
-            </div>
-
-            <div class="floating-label-field">
-                <input type="url" id="editBookmarkURL" autocomplete="off" />
-                <label for="editBookmarkURL" id="editBookmarkURLLabel">Bookmark URL</label>
-            </div>
-
-            <div class="modal-buttons">
-                <button id="saveBookmarkChanges">Save</button>
-                <button id="cancelBookmarkEdit">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <!----------------------- End of Bookmark System ----------------------->
+    <!----------------------- Google App Menu Setup Starting ----------------------->
 
     <!----------------------- Google App Menu Setup Starting ----------------------->
     <!-- Google Header Bar -->
     <div class="googleHeaderBar">
         <a href="https://mail.google.com" target="_blank" id="gmailHeaderLink">Gmail</a>
         <a href="https://images.google.com" target="_blank" id="imagesHeaderLink">Images</a>
-               <!-- Labs Link -->
+        <!-- Labs Link -->
         <a href="https://labs.google/?category=learn" target="_blank" class="header-icon" title="Labs">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="24" height="24" style="width: 24px; height: 24px; vertical-align: middle;">
-                <path fill="currentColor" d="M25,15h14v1h-14z M25,16h15v1h-15z M25,17h15v1h-15z M27,18h3v1h-3z M34,18h4v1h-4z M27,19h3v1h-3z M34,19h4v1h-4z M27,20h3v1h-3z M34,20h4v1h-4z M27,21h3v1h-3z M34,21h4v1h-4z M27,22h3v1h-3z M34,22h4v1h-4z M27,23h3v1h-3z M34,23h4v1h-4z M27,24h3v1h-3z M34,24h4v1h-4z M26,25h4v1h-4z M35,25h3v1h-3z M26,26h3v1h-3z M35,26h3v1h-3z M25,27h4v1h-4z M35,27h4v1h-4z M25,28h3v1h-3z M36,28h4v1h-4z M24,29h4v1h-4z M37,29h3v1h-3z M23,30h4v1h-4z M37,30h4v1h-4z M23,31h3v1h-3z M38,31h4v1h-4z M22,32h4v1h-4z M39,32h4v1h-4z M21,33h4v1h-4z M39,33h4v1h-4z M20,34h4v1h-4z M37,34h7v1h-7z M20,35h4v1h-4z M35,35h10v1h-10z M19,36h4v1h-4z M33,36h12v1h-12z M18,37h4v1h-4z M32,37h14v1h-14z M18,38h4v1h-4z M30,38h17v1h-17z M17,39h6v1h-6z M29,39h18v1h-18z M16,40h8v1h-8z M26,40h22v1h-22z M16,41h33v1h-33z M15,42h34v1h-34z M15,43h35v1h-35z M15,44h35v1h-35z M15,45h35v1h-35z M15,46h34v1h-34z M16,47h33v1h-33z M17,48h31v1h-31z" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="24" height="24"
+                style="width: 24px; height: 24px; vertical-align: middle;">
+                <path fill="currentColor"
+                    d="M25,15h14v1h-14z M25,16h15v1h-15z M25,17h15v1h-15z M27,18h3v1h-3z M34,18h4v1h-4z M27,19h3v1h-3z M34,19h4v1h-4z M27,20h3v1h-3z M34,20h4v1h-4z M27,21h3v1h-3z M34,21h4v1h-4z M27,22h3v1h-3z M34,22h4v1h-4z M27,23h3v1h-3z M34,23h4v1h-4z M27,24h3v1h-3z M34,24h4v1h-4z M26,25h4v1h-4z M35,25h3v1h-3z M26,26h3v1h-3z M35,26h3v1h-3z M25,27h4v1h-4z M35,27h4v1h-4z M25,28h3v1h-3z M36,28h4v1h-4z M24,29h4v1h-4z M37,29h3v1h-3z M23,30h4v1h-4z M37,30h4v1h-4z M23,31h3v1h-3z M38,31h4v1h-4z M22,32h4v1h-4z M39,32h4v1h-4z M21,33h4v1h-4z M39,33h4v1h-4z M20,34h4v1h-4z M37,34h7v1h-7z M20,35h4v1h-4z M35,35h10v1h-10z M19,36h4v1h-4z M33,36h12v1h-12z M18,37h4v1h-4z M32,37h14v1h-14z M18,38h4v1h-4z M30,38h17v1h-17z M17,39h6v1h-6z M29,39h18v1h-18z M16,40h8v1h-8z M26,40h22v1h-22z M16,41h33v1h-33z M15,42h34v1h-34z M15,43h35v1h-35z M15,44h35v1h-35z M15,45h35v1h-35z M15,46h34v1h-34z M16,47h33v1h-33z M17,48h31v1h-31z" />
             </svg>
         </a>
 
@@ -216,16 +87,6 @@
 
     <!-- Centered Icon Container -->
     <div id="iconContainer" class="icon-container" style="display: none;">
-        <!-- Header for Favorites -->
-        <div class="fav-header">
-            <span class="fav-title">Google Apps</span>
-            <button class="fav-edit" id="favEditBtn" title="Rearrange Mode (Drag and Drop)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 20h9" />
-                    <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
-                </svg>
-            </button>
-        </div>
         <!-- 1. Account -->
         <a href="https://myaccount.google.com/" class="icon-item">
             <div class="menuicon">
@@ -294,7 +155,8 @@
         <!-- 7. NotebookLM -->
         <a href="https://notebooklm.google.com/" class="icon-item">
             <div class="menuicon">
-                <img src="images/asset-preview.webp" alt="NotebookLM" style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;" />
+                <img src="images/asset-preview.webp" alt="NotebookLM"
+                    style="width: 36px; height: 36px; border-radius: 50%; object-fit: cover;" />
             </div>
             <div class="label short">NotebookLM</div>
         </a>
@@ -397,19 +259,52 @@
             <!-- ____________end of clock______________ -->
 
             <div class="ttteexxtt">
-                <div id="userText" contenteditable="true" spellcheck="false">Click here to edit</div>
                 <div id="date"></div>
+                <div id="userText" contenteditable="false" spellcheck="false" style="cursor: default;"></div>
             </div>
         </div>
         <!-- ---------end of leftDiv--------------- -->
 
         <div class="rightDiv" id="rightDiv">
             <!-- ---weather stuff--------- -->
-            <!-- ---Calendar Widget (formerly Weather)--------- -->
+            <!-- ---Weather Widget--------- -->
             <div class="topDiv" id="hideWeather">
-                <div class="lrectangle bgLightTint"></div>
+                <!-- News Section -->
+                <div class="news-widget bgLightTint">
+                    <div class="news-header">
+                        <div class="news-tabs">
+                            <button class="news-tab active" data-category="ai" title="AI News"><span
+                                    class="tab-label">AI</span></button>
+                            <button class="news-tab" data-category="anime" title="Anime News"><span
+                                    class="tab-label">Anime</span></button>
+                            <button class="news-tab" data-category="dev" title="Developer News"><span
+                                    class="tab-label">Dev</span></button>
+                            <button class="news-tab" data-category="general" title="General News"><span
+                                    class="tab-label">News</span></button>
+                        </div>
+                        <button class="news-refresh-btn" id="newsRefreshBtn" title="Refresh News">
+                            <svg class="refresh-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="news-list" id="newsList">
+                        <div class="news-skeleton">
+                            <div class="news-skeleton-item"><span class="skeleton-bullet"></span><span
+                                    class="skeleton-text"></span></div>
+                            <div class="news-skeleton-item"><span class="skeleton-bullet"></span><span
+                                    class="skeleton-text"></span></div>
+                            <div class="news-skeleton-item"><span class="skeleton-bullet"></span><span
+                                    class="skeleton-text"></span></div>
+                        </div>
+                    </div>
+                    <a href="https://news.google.com" target="_blank" class="news-read-more" id="newsReadMore">
+                        View More <span class="news-arrow">→</span>
+                    </a>
+                </div>
 
-                <!-- rotating calendar block (rAndakar) -->
+                <!-- Weather blob -->
                 <div class="rAndakar">
                     <svg fill="none" height="100%" viewBox="0 0 288 288" width="100%"
                         xmlns="http://www.w3.org/2000/svg">
@@ -438,13 +333,13 @@
                     <div class="dropdown search-dropdown">
                         <!-- Default Search Engine -->
                         <button id="default-dropdown-item" style="cursor: pointer;" role="button" class="dropdown-btn">
-                            <div id="default-dropdown" data-default data-engine-name="default" data-engine="0"
+                            <div id="default-dropdown" data-default data-engine-name="google" data-engine="1"
                                 class="dropdown-item">
                                 <svg width="30" height="30">
-                                    <use href="#default-engine-icon" />
+                                    <use href="#google-engine-icon" />
                                 </svg>
-                                <span class="engine-name" id="defaultEngineDD">
-                                    Default
+                                <span class="engine-name" id="googleEngineDD">
+                                    Google
                                 </span>
                             </div>
                         </button>
@@ -473,7 +368,8 @@
                                 <span class="engine-name" id="redditEngineDD">Reddit</span>
                             </div>
 
-                            <div data-engine="8" data-engine-name="wikipedia" id="wikipedia-dropdown" class="dropdown-item">
+                            <div data-engine="8" data-engine-name="wikipedia" id="wikipedia-dropdown"
+                                class="dropdown-item">
                                 <svg width="30" height="30">
                                     <use href="#wikipedia-engine-icon" />
                                 </svg>
@@ -487,14 +383,16 @@
                                 <span class="engine-name" id="quoraEngineDD">Quora</span>
                             </div>
 
-                            <div data-engine="10" data-engine-name="pinterest" id="pinterest-dropdown" class="dropdown-item">
+                            <div data-engine="10" data-engine-name="stackoverflow" id="stackoverflow-dropdown"
+                                class="dropdown-item">
                                 <svg width="30" height="30">
-                                    <use href="#pinterest-engine-icon" />
+                                    <use href="#stackoverflow-engine-icon" />
                                 </svg>
-                                <span class="engine-name" id="pinterestEngineDD">Pinterest</span>
+                                <span class="engine-name" id="stackoverflowEngineDD">Stack Overflow</span>
                             </div>
 
-                            <div data-engine="11" data-engine-name="scholar" id="scholar-dropdown" class="dropdown-item">
+                            <div data-engine="11" data-engine-name="scholar" id="scholar-dropdown"
+                                class="dropdown-item">
                                 <svg width="30" height="30">
                                     <use href="#scholar-engine-icon" />
                                 </svg>
@@ -506,16 +404,9 @@
                 </div>
 
                 <div class="searchbar-content">
-                    <input id="searchQ" placeholder="Type here..." type="text" autocomplete="off">
+                    <input id="mainInput" placeholder="Type here..." type="text" autocomplete="off">
 
                     <div class="searchControls">
-                        <!-- Mic Icon -->
-                        <div class="micIcon" id="micIcon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -1 24 24" height="100%" width="100%">
-                                <path id="micIconPath" class="accentColor"
-                                    d="M12 14q-1.25 0-2.125-.875T9 11V5q0-1.25.875-2.125T12 2t2.125.875T15 5v6q0 1.25-.875 2.125T12 14m-1 7v-3.075q-2.6-.35-4.3-2.325T5 11h2q0 2.075 1.463 3.538T12 16t3.538-1.463T17 11h2q0 2.625-1.7 4.6T13 17.925V21z" />
-                            </svg>
-                        </div>
                         <!-- Search Button -->
                         <button id="enterBtn">Search</button>
                     </div>
@@ -524,13 +415,9 @@
             <div id="resultBox" class="resultBox bgLightTint" style="display: none;"></div>
             <!-- ----------end of searchbar-------------- -->
 
-            <!-- Search Engine SVG Definitions -->
-            <svg style="display: none;">
-                <symbol id="default-engine-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path style="transform: scale(0.95); transform-origin: center;"
-                        d="M12 22q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12q0-.175-.012-.363t-.013-.312q-.125.725-.675 1.2T18 13h-2q-.825 0-1.412-.587T14 11v-1h-4V8q0-.825.588-1.412T12 6h1q0-.575.313-1.012t.762-.713q-.5-.125-1.012-.2T12 4Q8.65 4 6.325 6.325T4 12h5q1.65 0 2.825 1.175T13 16v1h-3v2.75q.5.125.988.188T12 20" />
-                </symbol>
-            </svg>
+
+
+
 
             <svg style="display: none;">
                 <symbol id="google-engine-icon" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg">
@@ -596,9 +483,9 @@
             </svg>
 
             <svg style="display: none;">
-                <symbol id="pinterest-engine-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path style="transform: scale(0.77); transform-origin: center;"
-                        d="M12 0C5.373 0 0 5.372 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z" />
+                <symbol id="stackoverflow-engine-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path style="transform: scale(0.77); transform-origin: center;" fill="currentColor"
+                        d="M18.986 21.865v-6.404h2.24v8.644H2.925v-8.644h2.24v6.404h13.821zm-11.643-5.484h9.341v-2.24H7.343v2.24zm.76-5.817l8.839 3.09 1.12-3.2-8.839-3.09-1.12 3.2zm2.08-5.32l7.733 5.37 1.832-2.617-7.733-5.37-1.832 2.617zm3.84-4.27l5.96 7.29 2.617-2.14-5.96-7.29-2.617 2.14zm5.66-2.58l3.6 8.69 2.793-1.155-3.6-8.69-2.793 1.155z" />
                 </symbol>
             </svg>
 
@@ -610,27 +497,11 @@
             </svg>
 
             <!-- ----------search with------------------- -->
-            <div class="searchWithCont" style="visibility: hidden;" id="search-with-container">
+            <div class="searchWithCont" style="display: none;" id="search-with-container">
 
                 <div class="hint bgLightTint" id="searchWithHint"></div>
 
                 <div class="searchEnginesContainer">
-
-                    <div class="search-engine bgLightTint" data-category="search-with">
-                        <svg width="30" height="30" class="search-engine-icon">
-                            <use href="#default-engine-icon" />
-                        </svg>
-                        <label class="engine-name" id="defaultEngine">Default</label>
-                        <input checked class="radio-button" name="search-engine" type="radio" value="engine0">
-                    </div>
-
-                    <div class="search-engine bgLightTint" data-category="search-with">
-                        <svg width="30" height="30" class="search-engine-icon">
-                            <use href="#google-engine-icon" />
-                        </svg>
-                        <label class="engine-name" id="googleEngine">Google</label>
-                        <input class="radio-button" name="search-engine" type="radio" value="engine1">
-                    </div>
 
                     <div class="search-engine bgLightTint" data-category="search-on">
                         <svg width="30" height="30" class="search-engine-icon">
@@ -666,9 +537,9 @@
 
                     <div class="search-engine bgLightTint" data-category="search-on">
                         <svg width="30" height="30" class="search-engine-icon">
-                            <use href="#pinterest-engine-icon" />
+                            <use href="#stackoverflow-engine-icon" />
                         </svg>
-                        <label class="engine-name" id="pinterestEngine">Pinterest</label>
+                        <label class="engine-name" id="stackoverflowEngine">Stack Overflow</label>
                         <input class="radio-button" name="search-engine" type="radio" value="engine10">
                     </div>
 
@@ -683,20 +554,54 @@
                 </div>
             </div>
             <!-- ----------end of search with------------- -->
-            <div class="quotesCont" id="motivationalQuotesCont">
-                <div class="quotesContainer">
-                </div>
-                <div class="authorWrapper">
-                    <div class="authorName"><span></span></div>
-                    <div class="qtRounder">
-                        <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                            <path class="lessDark targeted" d="M30 0L0 0C16.5685 0 30 13.4315 30 30L30 0Z" />
+            <!-- ----------Goals / Progress Tracker Widget-------------- -->
+            <div class="goals-widget bgLightTint" id="goalsWidget">
+                <div class="goals-header">
+                    <div class="goals-title-wrapper">
+                        <svg class="goals-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                            viewBox="0 0 24 24">
+                            <path class="accentColor" fill="currentColor"
+                                d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m0 2a8 8 0 0 1 8 8a8 8 0 0 1-8 8a8 8 0 0 1-8-8a8 8 0 0 1 8-8m0 2a6 6 0 0 0-6 6a6 6 0 0 0 6 6a6 6 0 0 0 6-6a6 6 0 0 0-6-6m0 2a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 2a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2z" />
                         </svg>
+                        <span class="goals-title" id="goalsWidgetTitle">Goals</span>
                     </div>
-                    <div class="qtRounder2">
-                        <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
-                            <path class="lessDark targeted" d="M30 0L0 0C16.5685 0 30 13.4315 30 30L30 0Z" />
-                        </svg>
+                    <div class="goals-header-actions">
+                        <!-- Input field to add goals (hidden by default) -->
+                        <div class="goals-input-container" id="goalsInputContainer" style="display: none;">
+                            <input type="text" id="newGoalInput" placeholder="Add new goal..." autocomplete="off">
+                            <button id="saveGoalBtn" title="Save Goal">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                            </button>
+                        </div>
+                        <button class="goals-add-btn" id="goalsAddBtn" title="Add Goal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                            </svg>
+                        </button>
+                        <div class="goals-dropdown-container">
+                            <button class="goals-more-btn" id="goalsMoreBtn" title="More Actions">⋮</button>
+                            <div class="goals-dropdown" id="goalsDropdown">
+                                <button class="goals-dropdown-item" id="clearCompletedGoalsAction">Clear
+                                    Completed</button>
+                                <button class="goals-dropdown-item" id="resetGoalsAction">Reset All</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="goals-list" id="goalsWidgetList">
+                    <!-- Loaded dynamically via JavaScript -->
+                </ul>
+
+                <div class="goals-footer">
+                    <span class="goals-progress-text" id="goalsProgressText">0 / 0 completed</span>
+                    <div class="goals-progress-bar-container">
+                        <div class="goals-progress-bar" id="goalsProgressBar" style="width: 0%;"></div>
                     </div>
                 </div>
             </div>
@@ -994,15 +899,9 @@
                                             <div class="infoText" id="shortcutsInfoText">Choose which shortcuts get
                                                 shown</div>
                                         </div>
-                                        <label class="switch">
-                                            <button id="shortcutEditButton">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24"
-                                                    style="transform: scale(1.1); transform-origin: center;">
-                                                    <path
-                                                        d="M12 21q-.425 0-.712-.288T11 20v-4q0-.425.288-.712T12 15t.713.288T13 16v1h7q.425 0 .713.288T21 18t-.288.713T20 19h-7v1q0 .425-.288.713T12 21m-8-2q-.425 0-.712-.288T3 18t.288-.712T4 17h4q.425 0 .713.288T9 18t-.288.713T8 19zm4-4q-.425 0-.712-.288T7 14v-1H4q-.425 0-.712-.288T3 12t.288-.712T4 11h3v-1q0-.425.288-.712T8 9t.713.288T9 10v4q0 .425-.288.713T8 15m4-2q-.425 0-.712-.288T11 12t.288-.712T12 11h8q.425 0 .713.288T21 12t-.288.713T20 13zm4-4q-.425 0-.712-.288T15 8V4q0-.425.288-.712T16 3t.713.288T17 4v1h3q.425 0 .713.288T21 6t-.288.713T20 7h-3v1q0 .425-.288.713T16 9M4 7q-.425 0-.712-.288T3 6t.288-.712T4 5h8q.425 0 .713.288T13 6t-.288.713T12 7z" />
-                                                </svg>
-                                            </button>
+                                        <label class="switch" style="width: auto;">
+                                            <button id="shortcutEditButton"
+                                                style="background: transparent; border: none; cursor: pointer; color: var(--darkerColor-blue); font-weight: 500; font-size: 0.95rem;">Manage</button>
                                         </label>
                                     </div>
 
@@ -1034,17 +933,6 @@
                                 <div class="sectionInner">
                                     <div class="ttcont">
                                         <div class="texts">
-                                            <div class="bigText" id="bookmarksText">Bookmarks</div>
-                                            <div class="infoText" id="bookmarksInfo">Show bookmarks sidebar</div>
-                                        </div>
-                                        <label class="switch">
-                                            <input id="bookmarksCheckbox" type="checkbox">
-                                            <span class="toggle"></span>
-                                        </label>
-                                    </div>
-
-                                    <div class="ttcont">
-                                        <div class="texts">
                                             <div class="bigText" id="ai_tools_button">AI Tools</div>
                                             <div class="infoText" id="enable_ai_tools">Show shortcuts for AI tools</div>
                                         </div>
@@ -1060,15 +948,9 @@
                                             <div class="infoText" id="aiToolsSettingsInfo">Select which AI tools to
                                                 display</div>
                                         </div>
-                                        <label class="switch">
-                                            <button id="aiToolsEditButton">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24"
-                                                    style="transform: scale(1.1); transform-origin: center;">
-                                                    <path
-                                                        d="M12 21q-.425 0-.712-.288T11 20v-4q0-.425.288-.712T12 15t.713.288T13 16v1h7q.425 0 .713.288T21 18t-.288.713T20 19h-7v1q0 .425-.288.713T12 21m-8-2q-.425 0-.712-.288T3 18t.288-.712T4 17h4q.425 0 .713.288T9 18t-.288.713T8 19zm4-4q-.425 0-.712-.288T7 14v-1H4q-.425 0-.712-.288T3 12t.288-.712T4 11h3v-1q0-.425.288-.712T8 9t.713.288T9 10v4q0 .425-.288.713T8 15m4-2q-.425 0-.712-.288T11 12t.288-.712T12 11h8q.425 0 .713.288T21 12t-.288.713T20 13zm4-4q-.425 0-.712-.288T15 8V4q0-.425.288-.712T16 3t.713.288T17 4v1h3q.425 0 .713.288T21 6t-.288.713T20 7h-3v1q0 .425-.288.713T16 9M4 7q-.425 0-.712-.288T3 6t.288-.712T4 5h8q.425 0 .713.288T13 6t-.288.713T12 7z" />
-                                                </svg>
-                                            </button>
+                                        <label class="switch" style="width: auto;">
+                                            <button id="aiToolsEditButton"
+                                                style="background: transparent; border: none; cursor: pointer; color: var(--darkerColor-blue); font-weight: 500; font-size: 0.95rem;">Manage</button>
                                         </label>
                                     </div>
 
@@ -1084,13 +966,16 @@
                                         </label>
                                     </div>
 
+
+
                                     <div class="ttcont">
                                         <div class="texts">
-                                            <div class="bigText" id="todoListText">To Do List</div>
-                                            <div class="infoText" id="todoListInfo">Show a daily To Do list</div>
+                                            <div class="bigText" id="goalsWidgetText">Goals Widget</div>
+                                            <div class="infoText" id="goalsWidgetInfo">Show a dynamic Goals & Progress
+                                                Tracker</div>
                                         </div>
                                         <label class="switch">
-                                            <input id="todoListCheckbox" type="checkbox">
+                                            <input id="goalsWidgetCheckbox" type="checkbox">
                                             <span class="toggle"></span>
                                         </label>
                                     </div>
@@ -1145,28 +1030,21 @@
                                             </label>
                                         </div>
 
-                                        <div class="ttcont" id="greetingField">
-                                            <div class="texts">
-                                                <div class="bigText" id="greetingtitle">Greeting</div>
-                                                <div class="infoText" id="greetinginfo">Show greeting below custom text
+                                        <div class="ttcont unflex" id="greetingField">
+                                            <div
+                                                style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                                <div class="texts">
+                                                    <div class="bigText" id="greetingtitle">Greeting</div>
+                                                    <div class="infoText" id="greetinginfo">Show greeting below date
+                                                    </div>
                                                 </div>
+                                                <label class="switch">
+                                                    <input id="greetingcheckbox" type="checkbox">
+                                                    <span class="toggle"></span>
+                                                </label>
                                             </div>
-                                            <label class="switch">
-                                                <input id="greetingcheckbox" type="checkbox">
-                                                <span class="toggle"></span>
-                                            </label>
-                                        </div>
-
-                                        <div class="ttcont">
-                                            <div class="texts">
-                                                <div class="bigText" id="userTextTitle">Customizable Text</div>
-                                                <div class="infoText" id="userTextInfo">Show custom text below the clock
-                                                </div>
-                                            </div>
-                                            <label class="switch">
-                                                <input id="userTextCheckbox" type="checkbox">
-                                                <span class="toggle"></span>
-                                            </label>
+                                            <input id="greetingUsername" placeholder="Enter username" type="text"
+                                                autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -1183,18 +1061,7 @@
                                 </div>
 
                                 <div class="sectionInner">
-                                    <div class="ttcont">
-                                        <div class="texts">
-                                            <div class="bigText" id="micIconTitle">Hide Microphone Icon</div>
-                                            <div class="infoText" id="micIconInfo">If voice typing is not working</div>
-                                        </div>
-                                        <label class="switch">
-                                            <input id="micIconCheckbox" type="checkbox">
-                                            <span class="toggle"></span>
-                                        </label>
-                                    </div>
-
-                                    <div class="ttcont">
+                                    <div class="ttcont" style="display: none;">
                                         <div class="texts">
                                             <div class="bigText" id="hideSearchWith">Hide Search Engines</div>
                                             <div class="infoText" id="hideSearchWithInfo">Switch between search engines
@@ -1206,31 +1073,7 @@
                                         </label>
                                     </div>
 
-                                    <div class="ttcont" id="quotesToggle">
-                                        <div class="texts">
-                                            <div class="bigText" id="motivationalQuotesText">Motivational Quotes</div>
-                                            <div class="infoText" id="motivationalQuotesInfo">Show quotes below the
-                                                searchbar</div>
-                                        </div>
-                                        <label class="switch">
-                                            <input id="motivationalQuotesCheckbox" type="checkbox">
-                                            <span class="toggle"></span>
-                                        </label>
-                                    </div>
 
-                                    <div class="quotesOptions">
-                                        <div class="ttcont" id="newQuoteOnRefreshToggle">
-                                            <div class="texts">
-                                                <div class="bigText" id="newQuoteOnRefreshText">Daily Quote</div>
-                                                <div class="infoText" id="newQuoteOnRefreshInfo">Show one quote per day
-                                                    instead of refreshing each time</div>
-                                            </div>
-                                            <label class="switch">
-                                                <input id="newQuoteOnRefreshCheckbox" type="checkbox">
-                                                <span class="toggle"></span>
-                                            </label>
-                                        </div>
-                                    </div>
 
                                     <div class="ttcont" id="searchSuggestionsHeader">
                                         <div class="texts">
@@ -1520,79 +1363,15 @@
                             <div class="sectionInner">
                                 <!-- start of languageSelector -->
                                 <div class="languageSection">
-                                    <div class="languageIcon">
-                                        <svg height="100%" width="30px" viewBox="0 0 16 16"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <g id="languageSelectorIconSvg" class="accentColor">
-                                                <path
-                                                    d="M4.545 6.714L4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286zm1.634-.736L5.5 3.956h-.049l-.679 2.022z" />
-                                                <path
-                                                    d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm7.138 9.995q.289.451.63.846c-.748.575-1.673 1.001-2.768 1.292c.178.217.451.635.555.867c1.125-.359 2.08-.844 2.886-1.494c.777.665 1.739 1.165 2.93 1.472c.133-.254.414-.673.629-.89c-1.125-.253-2.057-.694-2.82-1.284c.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6 6 0 0 1-.415-.492a2 2 0 0 1-.94.31" />
-                                            </g>
-                                        </svg>
-                                    </div>
+
 
                                     <!-- LANGUAGE SELECTION OPTIONS -->
                                     <select class="languageSelector" id="languageSelector">
-                                        <option value="ar_SA">Arabic (العربية)</option>
-                                        <option value="az">Azerbaijani (Azərbaycanca)</option>
-                                        <option value="bn">Bangla (বাংলা)</option>
-                                        <option value="zh">Chinese (Simplified) (简体中文)</option>
-                                        <option value="zh_TW">Chinese (Traditional) (繁體中文)</option>
-                                        <option value="cs">Czech (Čeština)</option>
                                         <option value="en">English (ENGLISH)</option>
-                                        <option value="fr">French (Français)</option>
-                                        <option value="de">German (Deutsch)</option>
-                                        <option value="el">Greek (Ελληνικά)</option>
-                                        <option value="hi">Hindi (हिन्दी)</option>
-                                        <option value="hu">Hungarian (Magyar)</option>
-                                        <option value="idn">Indonesian (Bahasa Indonesia)</option>
-                                        <option value="it">Italian (Italiano)</option>
-                                        <option value="ja">Japanese (日本語)</option>
-                                        <option value="ko">Korean (한국어)</option>
-                                        <option value="mr">Marathi (मराठी)</option>
-                                        <option value="ne">Nepali (नेपाली)</option>
-                                        <option value="fa">Persian (فارسی)</option>
-                                        <option value="pl">Polish (Polski)</option>
-                                        <option value="pt">Portuguese (Brazil) (Português)</option>
-                                        <option value="ru">Russian (Русский)</option>
-                                        <option value="sl">Slovenian (Slovenščina)</option>
-                                        <option value="es">Spanish (Español)</option>
-                                        <option value="sv">Swedish (Svenska)</option>
-                                        <option value="ta">Tamil (தமிழ்)</option>
-                                        <option value="th">Thai (ภาษาไทย)</option>
-                                        <option value="tr">Turkish (Türkçe)</option>
-                                        <option value="uk">Ukrainian (Українська)</option>
-                                        <option value="ur">Urdu (اردو)</option>
-                                        <option value="uz">Uzbek (O'zbek)</option>
-                                        <option value="vi">Vietnamese (Tiếng Việt)</option>
-                                        <!-- Place new language alphabetically -->
                                     </select>
                                     <!-- end of languageSelector -->
                                 </div>
 
-                                <!-- Settings -->
-                                <div class="backupRestoreContainer">
-                                    <button class="backupRestoreBtn" id="backupBtn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                d="M6.5 20q-2.275 0-3.887-1.575T1 14.575q0-1.95 1.175-3.475T5.25 9.15q.625-2.3 2.5-3.725T12 4q2.925 0 4.963 2.038T19 11q1.725.2 2.863 1.488T23 15.5q0 1.875-1.312 3.188T18.5 20H13q-.825 0-1.412-.587T11 18v-5.15L9.4 14.4L8 13l4-4l4 4l-1.4 1.4l-1.6-1.55V18h5.5q1.05 0 1.775-.725T21 15.5t-.725-1.775T18.5 13H17v-2q0-2.075-1.463-3.538T12 6T8.463 7.463T7 11h-.5q-1.45 0-2.475 1.025T3 14.5t1.025 2.475T6.5 18H9v2zm5.5-7" />
-                                        </svg>
-                                        <span id="backupText">Backup</span>
-                                    </button>
-
-                                    <button class="backupRestoreBtn" id="restoreBtn">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24">
-                                            <path fill="currentColor"
-                                                d="M13.25 3a9.003 9.003 0 0 0-9.26 9H2.2c-.45 0-.67.54-.35.85l2.79 2.8c.2.2.51.2.71 0l2.79-2.8c.32-.31.09-.85-.35-.85h-1.8c0-3.9 3.18-7.05 7.1-7c3.72.05 6.85 3.18 6.9 6.9c.05 3.91-3.1 7.1-7 7.1c-1.61 0-3.1-.55-4.28-1.48a.994.994 0 0 0-1.32.08c-.42.43-.39 1.13.08 1.5a8.93 8.93 0 0 0 5.52 1.9c5.05 0 9.14-4.17 9-9.26c-.13-4.69-4.05-8.61-8.74-8.74m-.51 5c-.41 0-.75.34-.75.75v3.68c0 .35.19.68.49.86l3.12 1.85c.36.21.82.09 1.03-.26c.21-.36.09-.82-.26-1.03l-2.88-1.71v-3.4c0-.4-.33-.74-.75-.74" />
-                                        </svg>
-                                        <span id="restoreText">Restore</span>
-                                    </button>
-                                </div>
-
-                                <input type="file" id="fileInput" accept=".json" style="display: none;">
 
                                 <button class="resetbtn" id="resetsettings">Reset Settings</button>
 
@@ -1659,38 +1438,100 @@
 
                 </div>
                 <!-- end of page 1 -->
-                <div class="page" id="shortcutEditPage">
-                    <div class="topBar">
-                        <button id="backButton">
+            </div>
+            <div class="page" id="shortcutEditPage">
+                <div class="topBar">
+                    <button id="backButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M21 11H6.414l5.293-5.293l-1.414-1.414L2.586 12l7.707 7.707l1.414-1.414L6.414 13H21z" />
+                        </svg>
+                    </button>
+                    <div class="rightButtons">
+                        <button id="newShortcutButton">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                <path
-                                    d="M21 11H6.414l5.293-5.293l-1.414-1.414L2.586 12l7.707 7.707l1.414-1.414L6.414 13H21z" />
+                                <path d="M3 13h8v8h2v-8h8v-2h-8V3h-2v8H3z" />
                             </svg>
                         </button>
-                        <div class="rightButtons">
-                            <button id="newShortcutButton">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path d="M3 13h8v8h2v-8h8v-2h-8V3h-2v8H3z" />
-                                </svg>
-                            </button>
-                            <button id="resetButton">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <path
-                                        d="M13 15.75v-1.5h4v1.5zM14.5 21v-1.25H13v-1.5h1.5V17H16v4zm2.5-1.25v-1.5h4v1.5zM18 17v-4h1.5v1.25H21v1.5h-1.5V17zm2.775-7H18.7q-.65-2.2-2.475-3.6T12 5Q9.075 5 7.037 7.038T5 12q0 1.8.813 3.3T8 17.75V15h2v6H4v-2h2.35Q4.8 17.75 3.9 15.938T3 12q0-1.875.713-3.512t1.924-2.85t2.85-1.925T12 3q3.225 0 5.663 1.988T20.775 10" />
-                                </svg>
-                            </button>
-                        </div>
+                        <button id="resetButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M13 15.75v-1.5h4v1.5zM14.5 21v-1.25H13v-1.5h1.5V17H16v4zm2.5-1.25v-1.5h4v1.5zM18 17v-4h1.5v1.25H21v1.5h-1.5V17zm2.775-7H18.7q-.65-2.2-2.475-3.6T12 5Q9.075 5 7.037 7.038T5 12q0 1.8.813 3.3T8 17.75V15h2v6H4v-2h2.35Q4.8 17.75 3.9 15.938T3 12q0-1.875.713-3.512t1.924-2.85t2.85-1.925T12 3q3.225 0 5.663 1.988T20.775 10" />
+                            </svg>
+                        </button>
                     </div>
+                </div>
+                <div class="shortcut-settings-tabs">
+                    <button class="settings-tab active" id="shortcutsTabBtn">Shortcuts</button>
+                    <button class="settings-tab" id="foldersTabBtn">Folders</button>
+                </div>
+                <div id="shortcutsSettingsView">
                     <div class="pageTitle" id="editShortcutsList">Saved Shortcuts</div>
                     <div id="editShortcutsListInfo">You can add new shortcuts by clicking the "+" icon or edit
                         existing ones by clicking on the shortcut name or URL</div>
                     <div id="shortcutList"></div>
                 </div>
+                <div id="foldersSettingsView" style="display: none;">
+                    <div class="pageTitle" id="editFoldersTitle">Workspaces & Folders</div>
+                    <div id="editFoldersListInfo">Organize your favorite websites into folders for quick access. Drag
+                        and drop to reorder.</div>
+                    <div id="folderList"></div>
+                    <button id="addFolderBtn" class="premium-btn">+ Add Folder</button>
+
+                    <!-- Folder Editor Detail view -->
+                    <div id="folderDetailsView" style="display: none;">
+                        <button id="folderDetailsBackBtn" class="back-link">← Back to Folders</button>
+                        <h3 id="folderDetailsTitle">Edit Folder</h3>
+                        <div class="form-group">
+                            <label for="folderNameInput">Folder Name</label>
+                            <input type="text" id="folderNameInput" placeholder="e.g. AI Tools">
+                        </div>
+                        <div class="form-group">
+                            <label>Folder Color Preset</label>
+                            <div class="color-presets-container">
+                                <span class="color-preset" style="background-color: var(--accentColor-blue);"
+                                    data-color="blue"></span>
+                                <span class="color-preset" style="background-color: #f44336;" data-color="red"></span>
+                                <span class="color-preset" style="background-color: #4caf50;" data-color="green"></span>
+                                <span class="color-preset" style="background-color: #ff9800;"
+                                    data-color="orange"></span>
+                                <span class="color-preset" style="background-color: #9c27b0;"
+                                    data-color="purple"></span>
+                                <span class="color-preset" style="background-color: #00bcd4;" data-color="cyan"></span>
+                            </div>
+                        </div>
+
+                        <h4>Websites inside this Folder</h4>
+                        <div id="folderWebsitesList"></div>
+                        <button id="addWebsiteBtn" class="premium-btn">+ Add Website</button>
+
+                        <!-- Website Form inside folder -->
+                        <div id="websiteForm" style="display: none;" class="modal-form">
+                            <h4 id="websiteFormTitle">Add Website</h4>
+                            <div class="form-group">
+                                <label for="webNameInput">Website Name</label>
+                                <input type="text" id="webNameInput" placeholder="e.g. LeetCode">
+                            </div>
+                            <div class="form-group">
+                                <label for="webUrlInput">Website URL</label>
+                                <input type="text" id="webUrlInput" placeholder="e.g. leetcode.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="webIconInput">Custom Icon URL / SVG (Optional)</label>
+                                <input type="text" id="webIconInput" placeholder="Leave empty for auto-fetch">
+                            </div>
+                            <div class="form-buttons">
+                                <button id="saveWebsiteBtn" class="premium-btn">Save</button>
+                                <button id="cancelWebsiteBtn" class="cancel-btn">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- ------end of Menu-bar----------- -->
-    <div id="menuButton"></div>
+    </div>
+
     <!-- ending-of-body -->
 
 </body>
