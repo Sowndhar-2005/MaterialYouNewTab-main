@@ -601,7 +601,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function handleNewShortcutClick() {
         if (this.classList.contains("inactive")) return;
 
-        const currentAmount = parseInt(localStorage.getItem("shortcutAmount")) || shortcutsCache.length;
+        const storedAmount = localStorage.getItem("shortcutAmount");
+        const currentAmount = (storedAmount !== null) ? parseInt(storedAmount) : shortcutsCache.length;
         if (currentAmount >= MAX_SHORTCUTS) return;
 
         addNewShortcut();
@@ -622,8 +623,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Loads shortcuts from localStorage or uses presets if none exist
     function loadShortcuts() {
-        const amount = localStorage.getItem("shortcutAmount") || presets.length;
-        const deleteInactive = amount <= 1;
+        const storedAmount = localStorage.getItem("shortcutAmount");
+        const amount = (storedAmount !== null) ? parseInt(storedAmount) : presets.length;
+        const deleteInactive = amount <= 0;
 
         shortcutsCache = [];
         dom.shortcutSettingsContainer.innerHTML = "";
@@ -1820,17 +1822,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Adds a new shortcut
     function addNewShortcut() {
-        const currentAmount = parseInt(localStorage.getItem("shortcutAmount")) || shortcutsCache.length;
+        const storedAmount = localStorage.getItem("shortcutAmount");
+        const currentAmount = (storedAmount !== null) ? parseInt(storedAmount) : shortcutsCache.length;
         if (currentAmount >= MAX_SHORTCUTS) return;
 
         const newAmount = currentAmount + 1;
         localStorage.setItem("shortcutAmount", newAmount.toString());
-
-        if (currentAmount >= 1) {
-            document.querySelectorAll(".shortcutDelete button.inactive").forEach(b => {
-                b.classList.remove("inactive");
-            });
-        }
 
         if (newAmount === MAX_SHORTCUTS) {
             dom.newShortcutButton.classList.add("inactive");
@@ -1845,8 +1842,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Deletes a shortcut
     function deleteShortcut(entry) {
-        const currentAmount = parseInt(localStorage.getItem("shortcutAmount")) || shortcutsCache.length;
-        if (currentAmount <= 1) return;
+        const storedAmount = localStorage.getItem("shortcutAmount");
+        const currentAmount = (storedAmount !== null) ? parseInt(storedAmount) : shortcutsCache.length;
+        if (currentAmount <= 0) return;
 
         const index = entry._index;
         entry.remove();
@@ -1863,12 +1861,6 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.removeItem(`shortcutName${currentAmount - 1}`);
         localStorage.removeItem(`shortcutURL${currentAmount - 1}`);
         localStorage.removeItem(`shortcutIcon${currentAmount - 1}`);
-
-        if (currentAmount - 1 === 1) {
-            document.querySelectorAll(".shortcutDelete button").forEach(b => {
-                b.classList.add("inactive");
-            });
-        }
 
         dom.newShortcutButton.classList.remove("inactive");
 

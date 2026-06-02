@@ -56,8 +56,18 @@ document.addEventListener("DOMContentLoaded", function () {
             saveDisplayStatus("googleAppsDisplayStatus", "none");
         }
     });
-    loadCheckboxState("googleAppsCheckboxState", googleAppsCheckbox);
-    loadDisplayStatus("googleAppsDisplayStatus", googleAppsCont);
+    // Check if this is the first load
+    const savedState = localStorage.getItem("googleAppsCheckboxState");
+    if (savedState === null) {
+        // Default to visible on first load
+        googleAppsCheckbox.checked = true;
+        localStorage.setItem("googleAppsCheckboxState", "checked");
+        googleAppsCont.style.display = "flex";
+        saveDisplayStatus("googleAppsDisplayStatus", "flex");
+    } else {
+        loadCheckboxState("googleAppsCheckboxState", googleAppsCheckbox);
+        loadDisplayStatus("googleAppsDisplayStatus", googleAppsCont);
+    }
 
     // Rearrange favorites via HTML5 Drag and Drop API
     const iconItems = iconContainer.querySelectorAll(".icon-item");
