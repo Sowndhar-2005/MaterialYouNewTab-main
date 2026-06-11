@@ -6508,6 +6508,8 @@ body[data-bg="wallpaper"] .dropdown-content {
 	border-radius: 12px;
 	cursor: pointer;
 	position: relative;
+	min-width: 0;
+	overflow: hidden;
 	transition: background-color 0.2s;
 }
 
@@ -6562,6 +6564,10 @@ body[data-bg="wallpaper"] .dropdown-content {
 	color: var(--textColorDark-blue);
 	transition: opacity 0.3s, color 0.3s;
 	flex: 1;
+	min-width: 0; /* allow flex child to shrink */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .goals-link {
@@ -6772,6 +6778,348 @@ body[data-bg="wallpaper"] .dropdown-content {
 	background-color: var(--darkColor-dark);
 	color: var(--textColorDark-dark);
 	border-color: var(--textColorDark-dark);
+}
+/* Goals Management Modal Overlay */
+.goals-modal-overlay {
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	z-index: 10000;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	pointer-events: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.goals-modal-overlay.show {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* Goals Modal Box */
+.goals-modal-box {
+	background: var(--accentLightTint-blue);
+	color: var(--textColorDark-blue);
+	border-radius: var(--round);
+	padding: 24px;
+	width: 460px;
+	max-width: 90vw;
+	max-height: 85vh;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	transform: scale(0.9);
+	transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+	font-family: inherit;
+}
+.goals-modal-overlay.show .goals-modal-box {
+	transform: scale(1);
+}
+
+/* Black Theme Overrides for Modal */
+.black-theme .goals-modal-box {
+	background: var(--accentLightTint-dark);
+	color: var(--textColorDark-dark);
+}
+
+/* Header */
+.goals-modal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	padding-bottom: 12px;
+}
+.black-theme .goals-modal-header {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.goals-modal-title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin: 0;
+	color: inherit;
+}
+.goals-modal-close-btn {
+	background: none;
+	border: none;
+	font-size: 1.5rem;
+	cursor: pointer;
+	color: inherit;
+	opacity: 0.6;
+	padding: 4px 8px;
+	border-radius: 50%;
+	line-height: 1;
+	transition: opacity 0.2s, background-color 0.2s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.goals-modal-close-btn:hover {
+	opacity: 1;
+	background-color: rgba(0, 0, 0, 0.05);
+}
+.black-theme .goals-modal-close-btn:hover {
+	background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Add Section */
+.goals-modal-add-section {
+	display: flex;
+	gap: 8px;
+}
+.goals-modal-add-section input {
+	flex: 1;
+	padding: 10px 14px;
+	border-radius: 12px;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	background: rgba(255, 255, 255, 0.5);
+	color: inherit;
+	font-size: 0.95rem;
+	outline: none;
+	transition: border-color 0.2s, background-color 0.2s;
+}
+.goals-modal-add-section input:focus {
+	border-color: var(--darkColor-blue);
+	background: #fff;
+}
+.black-theme .goals-modal-add-section input {
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	background: rgba(0, 0, 0, 0.2);
+}
+.black-theme .goals-modal-add-section input:focus {
+	border-color: var(--textColorDark-dark);
+	background: rgba(0, 0, 0, 0.4);
+}
+
+.goals-modal-btn {
+	background: var(--darkColor-blue);
+	color: #fff;
+	border: none;
+	border-radius: 12px;
+	padding: 0 18px;
+	font-size: 0.9rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: opacity 0.2s, transform 0.1s;
+}
+.goals-modal-btn:hover {
+	opacity: 0.9;
+}
+.goals-modal-btn:active {
+	transform: scale(0.97);
+}
+.black-theme .goals-modal-btn {
+	background: var(--textColorDark-dark);
+	color: var(--darkColor-dark);
+}
+
+/* List */
+.goals-modal-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	overflow-y: auto;
+	max-height: 300px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding-right: 4px;
+}
+.goals-modal-list::-webkit-scrollbar {
+	width: 6px;
+}
+.goals-modal-list::-webkit-scrollbar-track {
+	background: transparent;
+}
+.goals-modal-list::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+}
+.black-theme .goals-modal-list::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.15);
+}
+
+/* Items */
+.manage-goal-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: rgba(255, 255, 255, 0.3);
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	border-radius: 12px;
+	padding: 8px 12px;
+	transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+}
+.manage-goal-item:hover {
+	background: rgba(255, 255, 255, 0.5);
+}
+.black-theme .manage-goal-item {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.black-theme .manage-goal-item:hover {
+	background: rgba(255, 255, 255, 0.07);
+}
+
+/* Drag & Drop Visual States */
+.manage-goal-item.dragging {
+	opacity: 0.4;
+	border: 1px dashed var(--darkColor-blue);
+	background: rgba(0, 0, 0, 0.05);
+}
+.black-theme .manage-goal-item.dragging {
+	border: 1px dashed var(--textColorDark-dark);
+	background: rgba(255, 255, 255, 0.05);
+}
+.manage-goal-item.drag-over-top {
+	border-top: 2px solid var(--darkColor-blue) !important;
+}
+.manage-goal-item.drag-over-bottom {
+	border-bottom: 2px solid var(--darkColor-blue) !important;
+}
+.black-theme .manage-goal-item.drag-over-top {
+	border-top: 2px solid var(--textColorDark-dark) !important;
+}
+.black-theme .manage-goal-item.drag-over-bottom {
+	border-bottom: 2px solid var(--textColorDark-dark) !important;
+}
+
+/* Drag handle */
+.drag-handle {
+	cursor: grab;
+	font-size: 1.1rem;
+	color: inherit;
+	opacity: 0.4;
+	padding: 4px;
+	transition: opacity 0.2s;
+	user-select: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.drag-handle:hover {
+	opacity: 0.8;
+}
+.drag-handle:active {
+	cursor: grabbing;
+}
+
+/* Inline input text in list */
+.manage-goal-input {
+	flex: 1;
+	min-width: 0; /* Critical: allows flex child to shrink below content size */
+	background: transparent;
+	border: 1px solid transparent;
+	color: inherit;
+	padding: 6px 10px;
+	border-radius: 8px;
+	font-size: 0.95rem;
+	outline: none;
+	transition: border-color 0.2s, background-color 0.2s;
+	/* Truncate long text visually when not focused */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+/* Show full text when editing */
+.manage-goal-input:focus {
+	white-space: normal;
+	overflow: visible;
+	text-overflow: clip;
+	background: rgba(255, 255, 255, 0.8);
+	border-color: rgba(0, 0, 0, 0.1);
+}
+.black-theme .manage-goal-input:focus {
+	background: rgba(0, 0, 0, 0.3);
+	border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Actions area in item */
+.manage-goal-actions {
+	display: flex;
+	gap: 4px;
+	align-items: center;
+}
+
+.reorder-btn, .delete-goal-btn {
+	background: none;
+	border: none;
+	color: inherit;
+	cursor: pointer;
+	font-size: 0.9rem;
+	width: 28px;
+	height: 28px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 6px;
+	opacity: 0.5;
+	transition: opacity 0.2s, background-color 0.2s;
+}
+.reorder-btn:hover, .delete-goal-btn:hover {
+	opacity: 1;
+	background-color: rgba(0, 0, 0, 0.05);
+}
+.black-theme .reorder-btn:hover, .black-theme .delete-goal-btn:hover {
+	background-color: rgba(255, 255, 255, 0.08);
+}
+.delete-goal-btn:hover {
+	color: #d93025; /* soft Google red for deletion */
+}
+.black-theme .delete-goal-btn:hover {
+	color: #ff6b6b;
+}
+
+/* Modal Footer */
+.goals-modal-footer {
+	display: flex;
+	justify-content: flex-end;
+	border-top: 1px solid rgba(0, 0, 0, 0.08);
+	padding-top: 12px;
+}
+.black-theme .goals-modal-footer {
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Goals Link Helper Button inside Modal */
+.goals-link-helper-btn {
+	background: rgba(0, 0, 0, 0.05);
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 12px;
+	padding: 0 14px;
+	font-size: 0.85rem;
+	font-weight: 500;
+	color: inherit;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background-color 0.2s, opacity 0.2s;
+	white-space: nowrap;
+}
+
+.goals-link-helper-btn:hover {
+	background: rgba(0, 0, 0, 0.1);
+}
+
+.black-theme .goals-link-helper-btn {
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.black-theme .goals-link-helper-btn:hover {
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.goals-modal-input-group {
+	display: flex;
+	gap: 8px;
+	width: 100%;
 }
 
 

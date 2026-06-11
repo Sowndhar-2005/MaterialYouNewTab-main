@@ -11,6 +11,8 @@
 const currentLanguage = localStorage.getItem("selectedLanguage") || "en";
 const isRTL = rtlLanguages.includes(currentLanguage);
 
+window.isDragging = false;
+
 // ------------Showing & Hiding Menu-bar ---------------
 const menuButton = document.getElementById("menuButton");
 const menuBar = document.getElementById("menuBar");
@@ -85,6 +87,9 @@ menuButton.addEventListener("click", () => {
 
 //   ----------Hiding Menu Bar--------
 menuBar.addEventListener("click", (event) => {
+    if (window.isDragging) {
+        return;
+    }
     if (event.target === menuBar) {
         closeMenuBar()
     }

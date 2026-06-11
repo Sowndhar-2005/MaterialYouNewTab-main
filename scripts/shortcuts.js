@@ -1242,12 +1242,18 @@ document.addEventListener("DOMContentLoaded", function () {
             isReordering = false;
             isDragging = false;
             draggedElement = null;
+
+            window.isDragging = true;
+            setTimeout(() => {
+                window.isDragging = false;
+            }, 100);
         }
 
         dom.shortcutSettingsContainer.addEventListener("dragstart", e => {
             const item = e.target.closest(".shortcutSettingsEntry");
             if (item) {
                 isReordering = true;
+                window.isDragging = true;
                 draggedElement = item;
 
                 const rect = item.getBoundingClientRect();
@@ -1431,6 +1437,11 @@ document.addEventListener("DOMContentLoaded", function () {
             dom.folderList.classList.remove("dragging-ongoing");
             isReordering = false;
             draggedElement = null;
+
+            window.isDragging = true;
+            setTimeout(() => {
+                window.isDragging = false;
+            }, 100);
         }
 
         dom.folderList.addEventListener("mousedown", e => {
@@ -1446,14 +1457,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         dom.folderList.addEventListener("dragstart", e => {
-            const handle = e.target.closest(".grip-container");
-            if (!handle) {
-                e.preventDefault();
-                return;
-            }
-            const item = handle.closest(".folder-settings-entry");
-            if (item) {
+            const item = e.target.closest(".folder-settings-entry");
+            if (item && item.getAttribute("draggable") === "true") {
                 isReordering = true;
+                window.isDragging = true;
                 draggedElement = item;
 
                 const rect = item.getBoundingClientRect();
@@ -1467,6 +1474,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }, 0);
 
                 e.dataTransfer.effectAllowed = "move";
+            } else {
+                e.preventDefault();
             }
         });
 
@@ -1655,6 +1664,11 @@ document.addEventListener("DOMContentLoaded", function () {
             dom.folderWebsitesList.classList.remove("dragging-ongoing");
             isReordering = false;
             draggedElement = null;
+
+            window.isDragging = true;
+            setTimeout(() => {
+                window.isDragging = false;
+            }, 100);
         }
 
         dom.folderWebsitesList.addEventListener("mousedown", e => {
@@ -1670,14 +1684,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         dom.folderWebsitesList.addEventListener("dragstart", e => {
-            const handle = e.target.closest(".web-drag-handle");
-            if (!handle) {
-                e.preventDefault();
-                return;
-            }
-            const item = handle.closest(".folder-websites-entry");
-            if (item) {
+            const item = e.target.closest(".folder-websites-entry");
+            if (item && item.getAttribute("draggable") === "true") {
                 isReordering = true;
+                window.isDragging = true;
                 draggedElement = item;
 
                 const rect = item.getBoundingClientRect();
@@ -1691,6 +1701,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }, 0);
 
                 e.dataTransfer.effectAllowed = "move";
+            } else {
+                e.preventDefault();
             }
         });
 
