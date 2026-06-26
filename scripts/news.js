@@ -16,10 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
         ai: {
             feeds: [
                 "https://openai.com/news/rss.xml",
-                "https://blog.google/technology/ai/rss/",
                 "https://www.anthropic.com/news.rss",
+                "https://blogs.microsoft.com/ai/feed/",
                 "https://huggingface.co/blog/feed.xml",
-                "https://blogs.microsoft.com/ai/feed/"
+                "https://techcrunch.com/category/artificial-intelligence/feed/",
+                "https://venturebeat.com/category/ai/feed/"
             ],
             viewMoreUrl: "https://news.google.com/search?q=artificial+intelligence",
             fallbacks: [
@@ -34,7 +35,8 @@ document.addEventListener("DOMContentLoaded", function () {
             feeds: [
                 "https://www.animenewsnetwork.com/all/rss.xml",
                 "https://www.crunchyroll.com/news/feed",
-                "https://myanimelist.net/rss/news.xml"
+                "https://myanimelist.net/rss/news.xml",
+                "https://animecorner.me/feed/"
             ],
             viewMoreUrl: "https://www.animenewsnetwork.com",
             fallbacks: [
@@ -47,10 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         dev: {
             feeds: [
-                "https://dev.to/feed",
                 "https://news.ycombinator.com/rss",
-                "https://feeds.feedburner.com/TechCrunch/",
-                "https://www.theverge.com/rss/index.xml"
+                "https://github.blog/feed/",
+                "https://dev.to/feed",
+                "https://feed.infoq.com/",
+                "https://css-tricks.com/feed/"
             ],
             viewMoreUrl: "https://dev.to",
             fallbacks: [
@@ -61,10 +64,44 @@ document.addEventListener("DOMContentLoaded", function () {
                 { title: "Hugging Face expands JS libraries for client-side local models", link: "https://huggingface.co" }
             ]
         },
+        cinema: {
+            feeds: [
+                "https://variety.com/feed/",
+                "https://www.hollywoodreporter.com/feed/",
+                "https://deadline.com/feed/",
+                "https://www.bollywoodhungama.com/rss/news.xml"
+            ],
+            viewMoreUrl: "https://variety.com",
+            fallbacks: [
+                { title: "Upcoming blockbuster sets new box office expectations", link: "https://variety.com" },
+                { title: "Indie darling wins top prize at international film festival", link: "https://indiewire.com" },
+                { title: "Legendary director announces final cinematic project", link: "https://variety.com" },
+                { title: "Streaming platforms battle for rights to acclaimed sci-fi series", link: "https://indiewire.com" },
+                { title: "Award season predictions start heating up among critics", link: "https://variety.com" }
+            ]
+        },
+        india: {
+            feeds: [
+                "https://timesofindia.indiatimes.com/rssfeedstopstories.cms",
+                "https://www.thehindu.com/news/national/feeder/default.rss",
+                "https://feeds.feedburner.com/ndtvnews-top-stories",
+                "https://indianexpress.com/feed/"
+            ],
+            viewMoreUrl: "https://timesofindia.indiatimes.com",
+            fallbacks: [
+                { title: "India launches new infrastructure projects across major cities", link: "https://timesofindia.indiatimes.com" },
+                { title: "Economic summit held to discuss growing tech sector in India", link: "https://thehindu.com" },
+                { title: "National sports team secures historic victory in international tournament", link: "https://timesofindia.indiatimes.com" },
+                { title: "New educational reforms proposed for higher education institutions", link: "https://thehindu.com" },
+                { title: "Space agency successfully deploys new communication satellite", link: "https://timesofindia.indiatimes.com" }
+            ]
+        },
         general: {
             feeds: [
-                "https://news.google.com/rss",
-                "https://feeds.bbci.co.uk/news/rss.xml"
+                "https://feeds.bbci.co.uk/news/rss.xml",
+                "https://www.aljazeera.com/xml/rss/all.xml",
+                "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+                "https://news.google.com/rss"
             ],
             viewMoreUrl: "https://news.google.com",
             fallbacks: [
@@ -74,15 +111,64 @@ document.addEventListener("DOMContentLoaded", function () {
                 { title: "International trade agreements aim to stabilize supply chain routes", link: "https://bbc.com/news" },
                 { title: "Historic archaeological discovery found in southern European cavern", link: "https://news.google.com" }
             ]
+        },
+        gaming: {
+            feeds: [
+                "https://feeds.feedburner.com/ign/news",
+                "https://www.pcgamer.com/rss/",
+                "https://www.gamespot.com/feeds/news/",
+                "https://www.polygon.com/rss/index.xml"
+            ],
+            viewMoreUrl: "https://www.ign.com",
+            fallbacks: [
+                { title: "Highly anticipated RPG finally gets a release date", link: "https://ign.com" },
+                { title: "Next-gen console hardware rumors point to massive upgrades", link: "https://pcgamer.com" },
+                { title: "Indie game goes viral, breaking concurrent player records", link: "https://gamespot.com" },
+                { title: "Major studio announces new entry in beloved franchise", link: "https://polygon.com" },
+                { title: "Esports tournament concludes with an incredible upset", link: "https://ign.com" }
+            ]
+        },
+        sports: {
+            feeds: [
+                "https://www.espn.com/espn/rss/news",
+                "https://feeds.bbci.co.uk/sport/rss.xml",
+                "https://sports.yahoo.com/rss/"
+            ],
+            viewMoreUrl: "https://www.espn.com",
+            fallbacks: [
+                { title: "Major upset in final championship match stuns fans globally", link: "https://espn.com" },
+                { title: "Star player signs record-breaking contract extension", link: "https://sports.yahoo.com" },
+                { title: "Olympic committee announces new sports added to upcoming games", link: "https://bbc.com/sport" },
+                { title: "Underdog team secures surprising victory against defending champions", link: "https://espn.com" },
+                { title: "Legendary coach announces retirement after successful decades", link: "https://bbc.com/sport" }
+            ]
+        },
+        other: {
+            feeds: [
+                "https://www.space.com/feeds/all",
+                "https://feeds.feedburner.com/TheHackersNews",
+                "https://techcrunch.com/category/startups/feed/",
+                "https://www.theverge.com/rss/index.xml"
+            ],
+            viewMoreUrl: "https://news.google.com",
+            fallbacks: [
+                { title: "NASA announces upcoming mission to explore outer solar system", link: "https://space.com" },
+                { title: "Major cybersecurity vulnerability found in popular framework", link: "https://thehackernews.com" },
+                { title: "Top startups secure record-breaking funding in latest round", link: "https://techcrunch.com" },
+                { title: "New flagship smartphone leaked ahead of official announcement", link: "https://theverge.com" },
+                { title: "Advancements in quantum computing promise major industry shifts", link: "https://news.google.com" }
+            ]
         }
     };
 
-    // Specific developer focus keywords
-    const DEV_KEYWORDS = [
+    // Specific developer and AI focus keywords for useful information
+    const USEFUL_KEYWORDS = [
         "react", "angular", "typescript", "html", "css", ".net", "dotnet",
         "ai tool", "ollama", "hugging face", "huggingface", "open source", 
         "javascript", "node", "frontend", "backend", "web dev", "programming",
-        "developer", "coding", "software", "api", "git", "github"
+        "developer", "coding", "software", "api", "git", "github",
+        "guide", "tutorial", "how-to", "release", "update", "new feature", "framework",
+        "model", "llm", "gpt", "claude", "gemini", "weights", "dataset", "agent"
     ];
 
     // Selected state
@@ -91,14 +177,19 @@ document.addEventListener("DOMContentLoaded", function () {
         ai: 0,
         anime: 0,
         dev: 0,
-        general: 0
+        cinema: 0,
+        india: 0,
+        general: 0,
+        gaming: 0,
+        sports: 0,
+        other: 0
     };
 
     // Clean feed source attributions from titles
     function cleanTitle(title) {
         if (!title) return "";
         let cleaned = title
-            .replace(/\s*[-–—|]\s*(TechCrunch|The Verge|OpenAI|Google AI|Anthropic|Hugging Face|Microsoft|BBC News|Google News|AP News|Reuters|Crunchyroll|MyAnimeList|Anime News Network|ANN)\s*$/i, "")
+            .replace(/\s*[-–—|]\s*(TechCrunch|The Verge|OpenAI|Google AI|Anthropic|Hugging Face|Microsoft|BBC News|Google News|AP News|Reuters|Crunchyroll|MyAnimeList|Anime News Network|ANN|Variety|IndieWire|Times of India|The Hindu)\s*$/i, "")
             .trim();
         if (cleaned.length > 80) {
             cleaned = cleaned.substring(0, 77) + "...";
@@ -106,11 +197,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return cleaned;
     }
 
-    // Prioritize developer/tech topics based on key requirements
-    function prioritizeDevNews(items) {
+    // Prioritize useful developer/tech/AI topics based on key requirements
+    function prioritizeUsefulNews(items) {
         return items.sort((a, b) => {
-            const aHasKey = DEV_KEYWORDS.some(kw => a.title.toLowerCase().includes(kw));
-            const bHasKey = DEV_KEYWORDS.some(kw => b.title.toLowerCase().includes(kw));
+            const aHasKey = USEFUL_KEYWORDS.some(kw => a.title.toLowerCase().includes(kw));
+            const bHasKey = USEFUL_KEYWORDS.some(kw => b.title.toLowerCase().includes(kw));
             if (aHasKey && !bHasKey) return -1;
             if (!aHasKey && bHasKey) return 1;
             return 0; // Maintain original relative chronological ordering
@@ -159,12 +250,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
                 if (data && data.status === "ok" && data.items) {
+                    const now = Date.now();
+                    const oneDayMs = 24 * 60 * 60 * 1000;
                     data.items.forEach(item => {
-                        items.push({
-                            title: cleanTitle(item.title),
-                            link: item.link || config.viewMoreUrl,
-                            pubDate: item.pubDate ? new Date(item.pubDate).getTime() : Date.now()
-                        });
+                        const pubTime = item.pubDate ? new Date(item.pubDate).getTime() : now;
+                        // Only show live today news (published within the last 24 hours)
+                        if (now - pubTime <= oneDayMs) {
+                            items.push({
+                                title: cleanTitle(item.title),
+                                link: item.link || config.viewMoreUrl,
+                                pubDate: pubTime
+                            });
+                        }
                     });
                 }
             } catch (error) {
@@ -179,10 +276,10 @@ document.addEventListener("DOMContentLoaded", function () {
             // Sort by publish date descending
             items.sort((a, b) => b.pubDate - a.pubDate);
 
-            // Special keyword boosting for Developer news
+            // Special keyword boosting for useful Developer and AI news
             let processedItems = items;
-            if (category === "dev") {
-                processedItems = prioritizeDevNews(items);
+            if (category === "dev" || category === "ai") {
+                processedItems = prioritizeUsefulNews(items);
             }
 
             // Title-based de-duplication
@@ -313,12 +410,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    let cycleInterval;
+
+    function resetCycleInterval() {
+        if (cycleInterval) clearInterval(cycleInterval);
+        cycleInterval = setInterval(() => {
+            loadCategory(activeCategory, false, true);
+        }, 10000);
+    }
+
     // Set up tab events
     tabButtons.forEach(btn => {
         btn.addEventListener("click", () => {
             const cat = btn.getAttribute("data-category");
             if (cat && cat !== activeCategory) {
                 loadCategory(cat);
+                resetCycleInterval();
             }
         });
     });
@@ -330,6 +437,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             newsRefreshBtn.classList.add("spinning");
             await loadCategory(activeCategory, false, true);
+            resetCycleInterval();
             
             // Allow animation to complete smoothly before allowing next click
             setTimeout(() => {
@@ -338,11 +446,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Auto refresh every 30 minutes
+    // Auto refresh every 5 hours
     setInterval(() => {
         loadCategory(activeCategory, true);
-    }, 30 * 60 * 1000);
+    }, 5 * 60 * 60 * 1000);
 
     // Initial load
     loadCategory(activeCategory);
+    resetCycleInterval();
 });

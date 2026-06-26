@@ -244,11 +244,11 @@ async function initializeClock() {
         let greetingKey;
 
         // Determine the greeting key based on the current hour
-        if (currentHour < 12) {
+        if (currentHour >= 4 && currentHour < 12) {
             greetingKey = "morning";
-        } else if (currentHour < 17) {
+        } else if (currentHour >= 12 && currentHour < 17) {
             greetingKey = "afternoon";
-        } else if (currentHour < 21) {
+        } else if (currentHour >= 17 && currentHour < 21) {
             greetingKey = "evening";
         } else {
             greetingKey = "night";
@@ -273,11 +273,11 @@ async function initializeClock() {
             const currentHour = new Date().getHours();
             let greetingKey;
 
-            if (currentHour < 12) {
+            if (currentHour >= 4 && currentHour < 12) {
                 greetingKey = "morning";
-            } else if (currentHour < 17) {
+            } else if (currentHour >= 12 && currentHour < 17) {
                 greetingKey = "afternoon";
-            } else if (currentHour < 21) {
+            } else if (currentHour >= 17 && currentHour < 21) {
                 greetingKey = "evening";
             } else {
                 greetingKey = "night";
@@ -326,12 +326,13 @@ async function initializeClock() {
             const selectedTemplate = templates[templateIndex];
 
             const username = localStorage.getItem("greetingUsername") || "";
-            // Use cozy lowercase format for the username inside the cursive subtext caption
-            const formattedSubtext = username ? `${selectedTemplate}, ${username.toLowerCase()}.` : `${selectedTemplate}.`;
+            // Append name to main greeting
+            const displayGreeting = username ? `${cleanGreeting}, ${username}` : cleanGreeting;
+            const formattedSubtext = window.dailyMotivationalQuote || `${selectedTemplate}.`;
 
             // Render structured HTML with main title and animated subtext only if it changed
             const newGreetingHTML = `
-                <div class="greeting-main">${cleanGreeting}</div>
+                <div class="greeting-main">${displayGreeting}</div>
                 <div class="greeting-sub">${formattedSubtext}</div>
             `;
             if (lastGreetingString !== newGreetingHTML) {
@@ -624,8 +625,12 @@ async function initializeClock() {
         if (usernameInput) {
             usernameInput.value = localStorage.getItem("greetingUsername") || "";
             usernameInput.addEventListener("input", () => {
-                localStorage.setItem("greetingUsername", usernameInput.value.trim());
-                updateGreeting();
+                if (usernameInput.value.length <= 15) {
+                    localStorage.setItem("greetingUsername", usernameInput.value.trim());
+                    updateGreeting();
+                } else {
+                    usernameInput.value = usernameInput.value.slice(0, 15);
+                }
             });
         }
 
@@ -642,3 +647,21 @@ async function initializeClock() {
         updateGreeting();
     });
 }
+
+// Fetch daily motivational quote
+window.dailyMotivationalQuote = "";
+async function fetchMotivationalQuote() {
+    try {
+        const res = await fetch("https://dummyjson.com/quotes/random");
+        const data = await res.json();
+        if (data && data.quote) {
+            window.dailyMotivationalQuote = `"${data.quote}"`;
+            if (typeof updateGreeting === 'function') {
+                updateGreeting(); 
+            }
+        }
+    } catch (e) {
+        console.warn("Could not fetch daily quote", e);
+    }
+}
+fetchMotivationalQuote();

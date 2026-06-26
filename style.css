@@ -2575,12 +2575,19 @@ html[lang="ur"] .qtRounder2 {
 			)
 	);
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
+	overflow-x: auto;
 	padding: var(--shortcut-bar-gap-and-padding);
-	justify-content: center;
+	justify-content: flex-start;
 	width: fit-content;
 	/* gap: var(--gap) var(--shortcut-bar-gap-and-padding); */
 	gap: 2rem;
+	scrollbar-width: none;
+	scrollbar-color: var(--darkColor-blue) transparent;
+}
+
+.shortcutsContainer::-webkit-scrollbar {
+	display: none;
 }
 
 .shortcutsContainer::before {
@@ -2606,6 +2613,7 @@ html[lang="ur"] .qtRounder2 {
 	position: relative;
 	transition: all 0.3s;
 	isolation: isolate;
+	flex-shrink: 0; /* Prevents squishing on horizontal scroll */
 }
 
 .shortcutsContainer .shortcuts:hover {
@@ -6469,7 +6477,7 @@ body[data-bg="wallpaper"] .dropdown-content {
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
-	height: 90px; /* Stable height prevents other widgets from shifting */
+	height: 126px; /* Exactly fits 3 un-squished goals */
 	overflow-y: auto;
 	scrollbar-width: thin;
 	scrollbar-color: var(--darkColor-blue) transparent;
@@ -6509,6 +6517,7 @@ body[data-bg="wallpaper"] .dropdown-content {
 	cursor: pointer;
 	position: relative;
 	min-width: 0;
+	flex-shrink: 0; /* Prevents items from getting squished when there are many goals */
 	overflow: hidden;
 	transition: background-color 0.2s;
 }
@@ -7792,13 +7801,18 @@ body[data-bg="wallpaper"] .dropdown-content {
 	animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 	letter-spacing: 0.2px;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 #userText {
 	font-family: var(--main-font-family);
 	display: block;
 	word-wrap: break-word;
-	max-width: 32rem !important;
+	max-width: 18.75rem !important;
 	background-color: transparent !important;
 	padding: 0 !important;
 	border-radius: 0 !important;
