@@ -31,22 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 { title: "Microsoft integrates deeper agentic workflows into Copilot suite", link: "https://blogs.microsoft.com/ai/" }
             ]
         },
-        anime: {
-            feeds: [
-                "https://www.animenewsnetwork.com/all/rss.xml",
-                "https://www.crunchyroll.com/news/feed",
-                "https://myanimelist.net/rss/news.xml",
-                "https://animecorner.me/feed/"
-            ],
-            viewMoreUrl: "https://www.animenewsnetwork.com",
-            fallbacks: [
-                { title: "Top-rated anime series receives surprise movie sequel announcement", link: "https://animenewsnetwork.com" },
-                { title: "Crunchyroll Anime Awards reveals full list of nominees", link: "https://crunchyroll.com" },
-                { title: "Highly anticipated dark fantasy anime scheduled for Fall release", link: "https://myanimelist.net" },
-                { title: "New light novel adaptation tops active streaming charts", link: "https://crunchyroll.com" },
-                { title: "Classic retro anime series announced for high-definition remaster", link: "https://animenewsnetwork.com" }
-            ]
-        },
         dev: {
             feeds: [
                 "https://news.ycombinator.com/rss",
@@ -64,52 +48,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 { title: "Hugging Face expands JS libraries for client-side local models", link: "https://huggingface.co" }
             ]
         },
-        cinema: {
+        anime: {
             feeds: [
-                "https://variety.com/feed/",
-                "https://www.hollywoodreporter.com/feed/",
-                "https://deadline.com/feed/",
-                "https://www.bollywoodhungama.com/rss/news.xml"
+                "https://www.animenewsnetwork.com/all/rss.xml",
+                "https://www.crunchyroll.com/news/feed",
+                "https://myanimelist.net/rss/news.xml",
+                "https://animecorner.me/feed/"
             ],
-            viewMoreUrl: "https://variety.com",
+            viewMoreUrl: "https://www.animenewsnetwork.com",
             fallbacks: [
-                { title: "Upcoming blockbuster sets new box office expectations", link: "https://variety.com" },
-                { title: "Indie darling wins top prize at international film festival", link: "https://indiewire.com" },
-                { title: "Legendary director announces final cinematic project", link: "https://variety.com" },
-                { title: "Streaming platforms battle for rights to acclaimed sci-fi series", link: "https://indiewire.com" },
-                { title: "Award season predictions start heating up among critics", link: "https://variety.com" }
-            ]
-        },
-        india: {
-            feeds: [
-                "https://timesofindia.indiatimes.com/rssfeedstopstories.cms",
-                "https://www.thehindu.com/news/national/feeder/default.rss",
-                "https://feeds.feedburner.com/ndtvnews-top-stories",
-                "https://indianexpress.com/feed/"
-            ],
-            viewMoreUrl: "https://timesofindia.indiatimes.com",
-            fallbacks: [
-                { title: "India launches new infrastructure projects across major cities", link: "https://timesofindia.indiatimes.com" },
-                { title: "Economic summit held to discuss growing tech sector in India", link: "https://thehindu.com" },
-                { title: "National sports team secures historic victory in international tournament", link: "https://timesofindia.indiatimes.com" },
-                { title: "New educational reforms proposed for higher education institutions", link: "https://thehindu.com" },
-                { title: "Space agency successfully deploys new communication satellite", link: "https://timesofindia.indiatimes.com" }
-            ]
-        },
-        general: {
-            feeds: [
-                "https://feeds.bbci.co.uk/news/rss.xml",
-                "https://www.aljazeera.com/xml/rss/all.xml",
-                "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
-                "https://news.google.com/rss"
-            ],
-            viewMoreUrl: "https://news.google.com",
-            fallbacks: [
-                { title: "Global summits focus on renewable energy and climate frameworks", link: "https://news.google.com" },
-                { title: "Space exploration mission successfully completes lunar orbital entry", link: "https://bbc.com/news" },
-                { title: "Major technical standard adopted for secure passwordless logins", link: "https://news.google.com" },
-                { title: "International trade agreements aim to stabilize supply chain routes", link: "https://bbc.com/news" },
-                { title: "Historic archaeological discovery found in southern European cavern", link: "https://news.google.com" }
+                { title: "Top-rated anime series receives surprise movie sequel announcement", link: "https://animenewsnetwork.com" },
+                { title: "Crunchyroll Anime Awards reveals full list of nominees", link: "https://crunchyroll.com" },
+                { title: "Highly anticipated dark fantasy anime scheduled for Fall release", link: "https://myanimelist.net" },
+                { title: "New light novel adaptation tops active streaming charts", link: "https://crunchyroll.com" },
+                { title: "Classic retro anime series announced for high-definition remaster", link: "https://animenewsnetwork.com" }
             ]
         },
         gaming: {
@@ -132,7 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
             feeds: [
                 "https://www.espn.com/espn/rss/news",
                 "https://feeds.bbci.co.uk/sport/rss.xml",
-                "https://sports.yahoo.com/rss/"
+                "https://sports.yahoo.com/rss/",
+                "https://www.espncricinfo.com/rss/content/story/feeds/0.xml"
             ],
             viewMoreUrl: "https://www.espn.com",
             fallbacks: [
@@ -143,20 +96,74 @@ document.addEventListener("DOMContentLoaded", function () {
                 { title: "Legendary coach announces retirement after successful decades", link: "https://bbc.com/sport" }
             ]
         },
+        cinema: {
+            feeds: [
+                "https://variety.com/feed/",
+                "https://www.hollywoodreporter.com/feed/",
+                "https://deadline.com/feed/",
+                "https://www.bollywoodhungama.com/rss/news.xml"
+            ],
+            viewMoreUrl: "https://variety.com",
+            fallbacks: [
+                { title: "Upcoming blockbuster sets new box office expectations", link: "https://variety.com" },
+                { title: "Indie darling wins top prize at international film festival", link: "https://indiewire.com" },
+                { title: "Legendary director announces final cinematic project", link: "https://variety.com" },
+                { title: "Streaming platforms battle for rights to acclaimed sci-fi series", link: "https://indiewire.com" },
+                { title: "Award season predictions start heating up among critics", link: "https://variety.com" }
+            ]
+        },
+        local: {
+            feeds: [
+                "https://timesofindia.indiatimes.com/rssfeeds/4859238.cms",
+                "https://www.thehindu.com/news/national/tamil-nadu/feeder/default.rss",
+                "https://www.thehindu.com/news/cities/chennai/feeder/default.rss",
+                "https://timesofindia.indiatimes.com/rssfeedstopstories.cms",
+                "https://www.thehindu.com/news/national/feeder/default.rss",
+                "https://feeds.feedburner.com/ndtvnews-top-stories",
+                "https://indianexpress.com/feed/"
+            ],
+            viewMoreUrl: "https://news.google.com/search?q=tamil+nadu+OR+india+news",
+            fallbacks: [
+                { title: "Tamil Nadu launches new tech parks to boost IT sector growth", link: "https://timesofindia.indiatimes.com" },
+                { title: "Chennai metro rail expansion receives central government approval", link: "https://thehindu.com" },
+                { title: "India launches new infrastructure projects across major cities", link: "https://timesofindia.indiatimes.com" },
+                { title: "Economic summit held to discuss growing tech sector in India", link: "https://thehindu.com" },
+                { title: "Space agency successfully deploys new communication satellite", link: "https://timesofindia.indiatimes.com" }
+            ]
+        },
+        general: {
+            feeds: [
+                "https://feeds.bbci.co.uk/news/rss.xml",
+                "https://www.aljazeera.com/xml/rss/all.xml",
+                "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
+                "https://news.google.com/rss"
+            ],
+            viewMoreUrl: "https://news.google.com",
+            fallbacks: [
+                { title: "Global summits focus on renewable energy and climate frameworks", link: "https://news.google.com" },
+                { title: "Space exploration mission successfully completes lunar orbital entry", link: "https://bbc.com/news" },
+                { title: "Major technical standard adopted for secure passwordless logins", link: "https://news.google.com" },
+                { title: "International trade agreements aim to stabilize supply chain routes", link: "https://bbc.com/news" },
+                { title: "Historic archaeological discovery found in southern European cavern", link: "https://news.google.com" }
+            ]
+        },
         other: {
             feeds: [
                 "https://www.space.com/feeds/all",
+                "https://www.nasa.gov/feed/",
+                "https://www.sciencedaily.com/rss/all.xml",
                 "https://feeds.feedburner.com/TheHackersNews",
                 "https://techcrunch.com/category/startups/feed/",
-                "https://www.theverge.com/rss/index.xml"
+                "https://www.theverge.com/rss/index.xml",
+                "https://finance.yahoo.com/news/rssindex"
             ],
             viewMoreUrl: "https://news.google.com",
             fallbacks: [
                 { title: "NASA announces upcoming mission to explore outer solar system", link: "https://space.com" },
                 { title: "Major cybersecurity vulnerability found in popular framework", link: "https://thehackernews.com" },
-                { title: "Top startups secure record-breaking funding in latest round", link: "https://techcrunch.com" },
-                { title: "New flagship smartphone leaked ahead of official announcement", link: "https://theverge.com" },
-                { title: "Advancements in quantum computing promise major industry shifts", link: "https://news.google.com" }
+                { title: "Breakthrough in quantum computing achieved by research team", link: "https://sciencedaily.com" },
+                { title: "Global markets rally as central banks signal policy shifts", link: "https://finance.yahoo.com" },
+                { title: "New flagship smartphone leaked ahead of official announcement", link: "https://theverge.com" }
             ]
         }
     };
@@ -171,17 +178,21 @@ document.addEventListener("DOMContentLoaded", function () {
         "model", "llm", "gpt", "claude", "gemini", "weights", "dataset", "agent"
     ];
 
-    // Selected state
+    // Selected state — migrate legacy "india" category to "local"
     let activeCategory = localStorage.getItem("news_widget_active_category") || "ai";
+    if (activeCategory === "india") {
+        activeCategory = "local";
+        localStorage.setItem("news_widget_active_category", "local");
+    }
     let categoryOffsets = {
         ai: 0,
-        anime: 0,
         dev: 0,
-        cinema: 0,
-        india: 0,
-        general: 0,
+        anime: 0,
         gaming: 0,
         sports: 0,
+        cinema: 0,
+        local: 0,
+        general: 0,
         other: 0
     };
 
@@ -189,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function cleanTitle(title) {
         if (!title) return "";
         let cleaned = title
-            .replace(/\s*[-–—|]\s*(TechCrunch|The Verge|OpenAI|Google AI|Anthropic|Hugging Face|Microsoft|BBC News|Google News|AP News|Reuters|Crunchyroll|MyAnimeList|Anime News Network|ANN|Variety|IndieWire|Times of India|The Hindu)\s*$/i, "")
+            .replace(/\s*[-–—|]\s*(TechCrunch|The Verge|OpenAI|Google AI|Anthropic|Hugging Face|Microsoft|BBC News|BBC Sport|Google News|AP News|Reuters|Crunchyroll|MyAnimeList|Anime News Network|ANN|Variety|IndieWire|Deadline|Hollywood Reporter|Times of India|The Hindu|NDTV|Indian Express|ESPN|ESPNCricinfo|IGN|PC Gamer|GameSpot|Polygon|NASA|ScienceDaily|Yahoo Finance|Yahoo Sports|Space\.com|The Hacker News|Al Jazeera)\s*$/i, "")
             .trim();
         if (cleaned.length > 80) {
             cleaned = cleaned.substring(0, 77) + "...";

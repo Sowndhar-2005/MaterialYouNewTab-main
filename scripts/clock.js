@@ -416,6 +416,7 @@ async function initializeClock() {
         // Set time options and determine locale based on the current language
         const timeOptions = { hour: "2-digit", minute: "2-digit", hour12: hourformat };
         const locale = specialLanguages.includes(currentLanguage) || localizedLanguages.includes(currentLanguage) ? "en-US" : currentLanguage;
+        
         timeString = now.toLocaleTimeString(locale, timeOptions);
 
         // Split the time and period (AM/PM) if in 12-hour format

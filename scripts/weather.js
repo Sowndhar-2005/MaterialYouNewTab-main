@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error("Error reading weather cache for navigation:", e);
             }
             const searchQuery = cityName ? `weather ${cityName}` : "weather";
-            window.open(`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`, "_blank");
+            window.location.href = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
         });
     }
 });

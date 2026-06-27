@@ -6580,7 +6580,7 @@ body[data-bg="wallpaper"] .dropdown-content {
 }
 
 .goals-link {
-	color: var(--darkColor-blue);
+	color: var(--textColorDark-blue);
 	text-decoration: underline;
 	text-underline-offset: 3px;
 	font-weight: 600;
@@ -6588,11 +6588,11 @@ body[data-bg="wallpaper"] .dropdown-content {
 }
 
 .goals-link:hover {
-	color: var(--darkerColor-blue);
+	opacity: 0.8;
 }
 
 .black-theme .goals-link {
-	color: var(--textColorDark-dark);
+	color: var(--textColorDark-blue);
 }
 
 .black-theme .goals-link:hover {

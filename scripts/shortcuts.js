@@ -550,7 +550,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const item = document.createElement("a");
                 item.className = "popup-website-item";
                 item.href = normalizeUrl(web.url);
-                item.target = "_blank";
+                item.target = "_self";
                 item.rel = "noopener noreferrer";
 
                 const iconContainer = document.createElement("div");

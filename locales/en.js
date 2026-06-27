@@ -189,10 +189,10 @@ const en = {
     "changeBrowserTheme": "Change Browser Theme",
     "chromeThemeInfo": "Click the three dots (⋮) > More tools > Customize Chrome, then choose a color that matches the extension theme.",
     "edgeThemeInfo": "Goto Settings > Appearance, then choose a color that matches the extension theme.",
-    "braveThemeInfo": "Visit <a href=\"https://chromewebstore.google.com/category/themes/\" target=\"_blank\">Chrome Theme Store</a>, download and apply the theme that matches the extension.",
-    "firefoxThemeInfo": "Visit <a href=\"https://addons.mozilla.org/firefox/themes/\" target=\"_blank\">Firefox Themes</a>, download and apply the theme that matches the extension.",
+    "braveThemeInfo": "Visit <a href=\"https://chromewebstore.google.com/category/themes/\" target=\"_self\">Chrome Theme Store</a>, download and apply the theme that matches the extension.",
+    "firefoxThemeInfo": "Visit <a href=\"https://addons.mozilla.org/firefox/themes/\" target=\"_self\">Firefox Themes</a>, download and apply the theme that matches the extension.",
     "updateFirefoxHomepage": "Update Homepage",
-    "updateFirefoxHomepageInfo": "To change your homepage like the new tab as well, visit <a href=\"https://github.com/prem-k-r/MaterialYouNewTab#-firefox\" target=\"_blank\">this link</a> and follow the instructions.",
+    "updateFirefoxHomepageInfo": "To change your homepage like the new tab as well, visit <a href=\"https://github.com/prem-k-r/MaterialYouNewTab#-firefox\" target=\"_self\">this link</a> and follow the instructions.",
     "dontShowTips": "Don't show it again",
 
     // Footer Toast

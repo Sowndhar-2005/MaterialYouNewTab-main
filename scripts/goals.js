@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     href = 'https://' + href;
                 }
                 const placeholder = `___MARKDOWN_LINK_${markdownLinks.length}___`;
-                markdownLinks.push(`<a href="${href}" target="_blank" rel="noopener noreferrer" class="goals-link">${text}</a>`);
+                markdownLinks.push(`<a href="${href}" target="_self" rel="noopener noreferrer" class="goals-link">${text}</a>`);
                 return placeholder;
             });
 
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!/^https?:\/\//i.test(url)) {
                     href = 'https://' + url;
                 }
-                return `<a href="${href}" target="_blank" rel="noopener noreferrer" class="goals-link">${url}</a>`;
+                return `<a href="${href}" target="_self" rel="noopener noreferrer" class="goals-link">${url}</a>`;
             });
 
             // Restore markdown links
